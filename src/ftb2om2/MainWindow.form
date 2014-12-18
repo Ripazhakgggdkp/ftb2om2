@@ -9,21 +9,21 @@
             <Property name="text" type="java.lang.String" value="About"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="99" red="99" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Converter by JSNexen"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="GUI by Ripazhakgggdkp"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icon.jpg"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value=":)"/>
+                <Property name="iconTextGap" type="int" value="0"/>
+                <Property name="inheritsPopupMenu" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -97,8 +97,8 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="BrowseDifficulty" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="BrowseOutput" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="browseDifficulty" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="browseOutput" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <Component id="BrowseAudio" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
@@ -125,14 +125,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="difficultyField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BrowseDifficulty" max="32767" attributes="0"/>
+                      <Component id="browseDifficulty" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="outputField" alignment="3" max="32767" attributes="0"/>
                       <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
-                      <Component id="BrowseOutput" max="32767" attributes="0"/>
+                      <Component id="browseOutput" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -167,20 +167,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="outputField">
         </Component>
-        <Component class="javax.swing.JButton" name="BrowseDifficulty">
+        <Component class="javax.swing.JButton" name="browseDifficulty">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BrowseDifficultyActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseDifficultyActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BrowseOutput">
+        <Component class="javax.swing.JButton" name="browseOutput">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BrowseOutputActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseOutputActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="createDifficulty">
