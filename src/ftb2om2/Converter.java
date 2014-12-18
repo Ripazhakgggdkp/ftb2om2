@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
+import javax.imageio.IIOException;
 
 public class Converter {
 
@@ -30,7 +31,7 @@ public class Converter {
     public void Convert(String inputFile, String outputFile, String name) throws IOException {
         this.name = name;
         File ftbFile = new File(inputFile);
-        File osuFile = new File(outputFile + "\\" + name );
+        File osuFile = new File(outputFile + "\\" + name + ".osu");
         Read(ftbFile);
         
         //Adds "General" Section to the difficulty file
@@ -42,34 +43,41 @@ public class Converter {
     public void Read(File ftbFile) throws IOException {
         reader = new BufferedReader(new FileReader(ftbFile));
 
-        String line;
-        while (!(line = reader.readLine()).equalsIgnoreCase("!~BPMS")) {
+        String line = reader.readLine();
+        String[] vars = line.split(" ");
+
+        if (vars[0].equalsIgnoreCase("$~DIFF")) {
+            while (!(line = reader.readLine()).equalsIgnoreCase("!~BPMS")) {
+            }
+            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+                vars = line.split(" ");
+                BPM bpm = new BPM();
+                bpm.setMs(Double.parseDouble(vars[0]));
+                bpm.setBpm(Double.parseDouble(vars[1]));
+                bpms.add(bpm);
+            }
+            while (!reader.readLine().equalsIgnoreCase("!~SPEEDS")) {
+            }
+            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+                vars = line.split(" ");
+                Multiplier multiplier = new Multiplier();
+                multiplier.setMs(Double.parseDouble(vars[0]));
+                multiplier.setMultiplier(Double.parseDouble(vars[1]));
+                multipliers.add(multiplier);
+            }
+            while (!reader.readLine().equalsIgnoreCase("!~NOTES")) {
+            }
+            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+                vars = line.split(" ");
+                Note note = new Note();
+                note.setMs(Double.parseDouble(vars[0]));
+                note.setDuration(Double.parseDouble(vars[1]));
+                note.setLane(Short.parseShort(vars[2]));
+                notes.add(note);
+            }
         }
-        while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
-            String[] vars = line.split(" ");
-            BPM bpm = new BPM();
-            bpm.setMs(Double.parseDouble(vars[0]));
-            bpm.setBpm(Double.parseDouble(vars[1]));
-            bpms.add(bpm);
-        }
-        while (!reader.readLine().equalsIgnoreCase("!~SPEEDS")) {
-        }
-        while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
-            String[] vars = line.split(" ");
-            Multiplier multiplier = new Multiplier();
-            multiplier.setMs(Double.parseDouble(vars[0]));
-            multiplier.setMultiplier(Double.parseDouble(vars[1]));
-            multipliers.add(multiplier);
-        }
-        while (!reader.readLine().equalsIgnoreCase("!~NOTES")) {
-        }
-        while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
-            String[] vars = line.split(" ");
-            Note note = new Note();
-            note.setMs(Double.parseDouble(vars[0]));
-            note.setDuration(Double.parseDouble(vars[1]));
-            note.setLane(Short.parseShort(vars[2]));
-            notes.add(note);
+        else {
+            throw new IOException("The file isn't the correct format!");
         }
     }
 
@@ -82,7 +90,7 @@ public class Converter {
             sb.append(bpm.getMs().longValue());
             sb.append(",");            
             //Osu style bpm by dividing 60000
-            sb.append((60000 / ((bpm.getBpm() != 0) ? bpm.getBpm() : 15)));
+            sb.append((60000 / ((bpm.getBpm() > 0) ? bpm.getBpm() : 15)));
             sb.append(",4,1,0,100,1,0\n");
             writer.write(sb.toString());
         }
@@ -91,7 +99,7 @@ public class Converter {
             sb.append(multiplier.getMs().longValue());
             sb.append(",-");            
             //Osu style SV
-            sb.append((1 / ((multiplier.getMultiplier() <= 0) ? multiplier.getMultiplier() : 0.10) * 100));
+            sb.append((1 / ((multiplier.getMultiplier() > 0) ? multiplier.getMultiplier() : 0.10) * 100));
             sb.append(",4,1,0,100,0,0\n");
             writer.write(sb.toString());
         }

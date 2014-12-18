@@ -6,6 +6,7 @@
 package ftb2om2;
 
 import java.io.IOException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -36,8 +37,8 @@ public class MainWindow extends javax.swing.JFrame {
         difficultyField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         outputField = new javax.swing.JTextField();
-        BrowseDifficulty = new javax.swing.JButton();
-        BrowseOutput = new javax.swing.JButton();
+        browseDifficulty = new javax.swing.JButton();
+        browseOutput = new javax.swing.JButton();
         createDifficulty = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         audioField = new javax.swing.JTextField();
@@ -47,7 +48,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         About = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,17 +64,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Output folder");
 
-        BrowseDifficulty.setText("...");
-        BrowseDifficulty.addActionListener(new java.awt.event.ActionListener() {
+        browseDifficulty.setText("...");
+        browseDifficulty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BrowseDifficultyActionPerformed(evt);
+                browseDifficultyActionPerformed(evt);
             }
         });
 
-        BrowseOutput.setText("...");
-        BrowseOutput.addActionListener(new java.awt.event.ActionListener() {
+        browseOutput.setText("...");
+        browseOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BrowseOutputActionPerformed(evt);
+                browseOutputActionPerformed(evt);
             }
         });
 
@@ -134,8 +134,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BrowseDifficulty, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BrowseOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(browseDifficulty, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BrowseAudio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -156,13 +156,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(difficultyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BrowseDifficulty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(browseDifficulty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(outputField)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BrowseOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(browseOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -176,12 +176,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         About.setText("About");
 
-        jMenuItem1.setForeground(new java.awt.Color(153, 153, 153));
-        jMenuItem1.setText("Converter by JSNexen");
-        About.add(jMenuItem1);
-
         jMenuItem2.setForeground(new java.awt.Color(153, 153, 153));
-        jMenuItem2.setText("GUI by Ripazhakgggdkp");
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icon.jpg"))); // NOI18N
+        jMenuItem2.setText(":)");
+        jMenuItem2.setIconTextGap(0);
+        jMenuItem2.setInheritsPopupMenu(true);
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         About.add(jMenuItem2);
 
         jMenuBar2.add(About);
@@ -202,31 +206,41 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void handleError(IOException e) {
+        if (e.getMessage() == null || e.getMessage().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(rootPane, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void difficultyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_difficultyFieldActionPerformed
 
     }//GEN-LAST:event_difficultyFieldActionPerformed
 
-    private void BrowseDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseDifficultyActionPerformed
+    private void browseDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseDifficultyActionPerformed
 
         PathGetter file = new PathGetter();
         file.GetPath(difficultyField, false, false, false);
-    }//GEN-LAST:event_BrowseDifficultyActionPerformed
+    }//GEN-LAST:event_browseDifficultyActionPerformed
 
-    private void BrowseOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseOutputActionPerformed
+    private void browseOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseOutputActionPerformed
         PathGetter file = new PathGetter();
         file.GetPath(outputField, true, false, true);
-    }//GEN-LAST:event_BrowseOutputActionPerformed
+    }//GEN-LAST:event_browseOutputActionPerformed
 
     private void createDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultyActionPerformed
-        Converter converter = new Converter();
-        try {
-            converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText());
-            
-            JOptionPane.showMessageDialog(rootPane, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(rootPane, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
+        if (outputName.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(rootPane, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Converter converter = new Converter();
+            try {
+                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText());
+                JOptionPane.showMessageDialog(rootPane, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+            } catch (IOException e) {
+                handleError(e);
+            }
         }
-
     }//GEN-LAST:event_createDifficultyActionPerformed
 
     private void audioFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_audioFieldActionPerformed
@@ -242,27 +256,40 @@ public class MainWindow extends javax.swing.JFrame {
         Converter converter = new Converter();
         Zipper zip = new Zipper();
 
-        try {
-            converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText());
-            JOptionPane.showMessageDialog(rootPane, "File converted succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
-            zip.createOSZ(audioField.getText(), difficultyField.getText(), outputField.getText(), outputName.getText());
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(rootPane, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
+        if (outputName.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(rootPane, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText());
+                JOptionPane.showMessageDialog(rootPane, "File converted succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+                zip.createOSZ(audioField.getText(), difficultyField.getText(), outputField.getText(), outputName.getText());
+            } catch (IOException e) {
+                handleError(e);
+            }
         }
     }//GEN-LAST:event_createOsuFileActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
         // Tries to set look and feel to windows
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -278,9 +305,9 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu About;
     private javax.swing.JButton BrowseAudio;
-    private javax.swing.JButton BrowseDifficulty;
-    private javax.swing.JButton BrowseOutput;
     private javax.swing.JTextField audioField;
+    private javax.swing.JButton browseDifficulty;
+    private javax.swing.JButton browseOutput;
     private javax.swing.JButton createDifficulty;
     private javax.swing.JButton createOsuFile;
     private javax.swing.JTextField difficultyField;
@@ -289,7 +316,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField outputField;
