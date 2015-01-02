@@ -20,7 +20,7 @@ public class Zipper {
         ZipOutputStream zos = new ZipOutputStream(fos);
 
         addToZip(mp3Path, "Audio.mp3", zos);
-        addToZip(outputPath + "\\" + fileName, "Difficulty.osu", zos);
+        addToZip(outputPath + "\\" + fileName + ".osu", "Difficulty.osu", zos);
 
         zos.close();
         fos.close();

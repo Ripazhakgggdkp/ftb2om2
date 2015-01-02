@@ -18,6 +18,7 @@ public class Converter {
     private String name;
     private final List<Note> notes;
     private final List<BPM> bpms;
+    private Integer hitsoundVolume;
     private List<Multiplier> multipliers;
     private BufferedReader reader;
     private PrintWriter writer;
@@ -28,10 +29,11 @@ public class Converter {
         this.multipliers = new LinkedList<>();
     }
 
-    public void Convert(String inputFile, String outputFile, String name) throws IOException {
+    public void Convert(String inputFile, String outputFile, String name, Integer volume) throws IOException {
         this.name = name;
         File ftbFile = new File(inputFile);
         File osuFile = new File(outputFile + "\\" + name + ".osu");
+        hitsoundVolume = volume;
         Read(ftbFile);
         
         //Adds "General" Section to the difficulty file
@@ -91,7 +93,7 @@ public class Converter {
             sb.append(",");            
             //Osu style bpm by dividing 60000
             sb.append((60000 / ((bpm.getBpm() > 0) ? bpm.getBpm() : 15)));
-            sb.append(",4,1,0,100,1,0\n");
+            sb.append(",4,1,0," + hitsoundVolume + ",1,0\n");
             writer.write(sb.toString());
         }
         for (Multiplier multiplier : multipliers) {
@@ -100,7 +102,7 @@ public class Converter {
             sb.append(",-");            
             //Osu style SV
             sb.append((1 / ((multiplier.getMultiplier() > 0) ? multiplier.getMultiplier() : 0.10) * 100));
-            sb.append(",4,1,0,100,0,0\n");
+            sb.append(",4,1,0," + hitsoundVolume + ",0,0\n");
             writer.write(sb.toString());
         }
         writer.write("\n\n");
