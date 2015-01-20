@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ftb2om2;
+package com.ftb2om2.ftb2om2;
 
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -16,8 +16,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class PathGetter extends JFileChooser {
 
     private static JFileChooser filechooser;
+    private boolean approved = false;
 
-    public void GetPath(JTextField textField, boolean saveDialog, boolean mp3, boolean directory) {
+    public String GetPath(boolean saveDialog, boolean mp3, boolean directory) {
         filechooser = new JFileChooser();
         FileNameExtensionFilter filter;
 
@@ -41,7 +42,13 @@ public class PathGetter extends JFileChooser {
         }
 
         if (status == JFileChooser.APPROVE_OPTION) {
-            textField.setText(filechooser.getSelectedFile().getAbsoluteFile().toString());
+            approved = true;
+            return filechooser.getSelectedFile().getAbsoluteFile().toString();
         }
+        return null;
+    }
+
+    public boolean isApproved() {
+        return approved;
     }
 }

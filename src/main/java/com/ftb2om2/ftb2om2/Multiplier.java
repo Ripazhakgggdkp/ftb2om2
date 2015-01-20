@@ -1,4 +1,4 @@
-package ftb2om2;
+package com.ftb2om2.ftb2om2;
 
 public class Multiplier {
     private Double ms;
