@@ -83,6 +83,8 @@ public class Converter {
         } else {
             throw new IOException("The file isn't the correct format!");
         }
+        
+        reader.close();
     }
 
     public void Write(File osuFile) throws IOException {
