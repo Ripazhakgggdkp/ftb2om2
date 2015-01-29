@@ -408,7 +408,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void dragAndDrop() {
+    private void dragAndDrop() {
         audioField.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent evt) {
                 audioFieldDragAndDrop(evt);
@@ -426,7 +426,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
-    public String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
+    private String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
         evt.acceptDrop(DnDConstants.ACTION_COPY);
         List<File> droppedFile = (List<File>) evt
                 .getTransferable()
@@ -582,11 +582,7 @@ public class MainWindow extends javax.swing.JFrame {
             artistField.setText(mp3.getArtist());
             unicodeArtistField.setText(mp3.getUnicodeArtist());
         }
-    }
-
-    
-    
-    
+    }     
 
     public static void main(String args[]) {
         // Tries to set look and feel to windows
