@@ -241,9 +241,6 @@
               <Properties>
                 <Property name="dragEnabled" type="boolean" value="true"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="difficultyFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="browseDifficulty">
               <Properties>
@@ -418,19 +415,10 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="titleField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="unicodeTitleField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unicodeTitleFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="artistField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="artistFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
@@ -438,9 +426,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="creatorField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creatorFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -448,9 +433,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="unicodeArtistField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unicodeArtistFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -458,9 +440,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="versionField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="versionFieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -468,9 +447,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="sourceField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sourceFieldActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
