@@ -200,6 +200,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="audioField">
+              <Properties>
+                <Property name="dragEnabled" type="boolean" value="true"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="audioFieldActionPerformed"/>
               </Events>
@@ -230,8 +233,14 @@
             <Component class="javax.swing.JTextField" name="outputName">
             </Component>
             <Component class="javax.swing.JTextField" name="outputField">
+              <Properties>
+                <Property name="dragEnabled" type="boolean" value="true"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="difficultyField">
+              <Properties>
+                <Property name="dragEnabled" type="boolean" value="true"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="difficultyFieldActionPerformed"/>
               </Events>

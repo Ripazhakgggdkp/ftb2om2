@@ -8,11 +8,19 @@ package com.ftb2om2.ftb2om2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
@@ -20,12 +28,13 @@ import javax.swing.UIManager;
  * @author Ripazhakgggdkp
  */
 public class MainWindow extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+        dragAndDrop();
     }
 
     /**
@@ -96,6 +105,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setText("Audio (.mp3)");
 
+        audioField.setDragEnabled(true);
         audioField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 audioFieldActionPerformed(evt);
@@ -115,6 +125,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setText("Output name");
 
+        outputField.setDragEnabled(true);
+
+        difficultyField.setDragEnabled(true);
         difficultyField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 difficultyFieldActionPerformed(evt);
@@ -395,6 +408,27 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void dragAndDrop() {
+        audioField.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                audioFieldDragAndDrop(evt);
+            }
+        });
+        difficultyField.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                difficultyFieldDragAndDrop(evt);
+            }            
+        });
+    }
+    
+    public String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
+        evt.acceptDrop(DnDConstants.ACTION_COPY);
+            List<File> droppedFile = (List<File>) evt
+                    .getTransferable()
+                    .getTransferData(DataFlavor.javaFileListFlavor);
+            return droppedFile.get(0).getAbsolutePath();                
+    }
+
     private void handleError(IOException e) {
         if (e.getMessage() == null || e.getMessage().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -402,11 +436,11 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void fillMetadata(Metadata metadata) {
         metadata.setTitle(titleField.getText());
         metadata.setUnicodeTitle(unicodeTitleField.getText());
-        metadata.setArtist(artistField.getText());            
+        metadata.setArtist(artistField.getText());
         metadata.setUnicodeArtist(unicodeArtistField.getText());
         metadata.setCreator(creatorField.getText());
         metadata.setVersion(versionField.getText());
@@ -432,19 +466,18 @@ public class MainWindow extends javax.swing.JFrame {
         PathGetter file = new PathGetter();
         String path = file.GetPath(false, true, false);
         audioField.setText(path);
-               
+
         if (file.isApproved()) {
             MP3TagWrapper mp3 = new MP3TagWrapper();
             try {
                 mp3.fillTags(path);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Your selected file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);                
+                JOptionPane.showMessageDialog(rootPane, "Your selected file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);
             } catch (UnsupportedTagException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Unsupported Tags!", "Your selected mp3 has unsupported tags, autofill won't work!", JOptionPane.PLAIN_MESSAGE);
             } catch (InvalidDataException ex) {
                 Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally {
+            } finally {
                 titleField.setText(mp3.getTitle());
                 unicodeTitleField.setText(mp3.getUnicodeTitle());
                 artistField.setText(mp3.getArtist());
@@ -460,14 +493,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
         Converter converter = new Converter();
         Metadata metadata = new Metadata();
-        fillMetadata(metadata);        
+        fillMetadata(metadata);
         Zipper zip = new Zipper();
 
         if (outputName.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(),metadata);
+                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(), metadata);
                 zip.createOSZ(audioField.getText(), difficultyField.getText(), outputField.getText(), outputName.getText());
                 JOptionPane.showMessageDialog(rootPane, "File converted succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
@@ -482,9 +515,9 @@ public class MainWindow extends javax.swing.JFrame {
         } else {
             Converter converter = new Converter();
             Metadata metadata = new Metadata();
-            fillMetadata(metadata);            
+            fillMetadata(metadata);
             try {
-                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(),metadata);
+                converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(), metadata);
                 JOptionPane.showMessageDialog(rootPane, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
                 handleError(e);
@@ -519,6 +552,23 @@ public class MainWindow extends javax.swing.JFrame {
     private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_titleFieldActionPerformed
+
+    private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
+        try {
+            audioField.setText(getDragAndDropPath(evt));
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void difficultyFieldDragAndDrop(DropTargetDropEvent evt) {
+        try {
+            difficultyField.setText(getDragAndDropPath(evt));
+        }
+        catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void main(String args[]) {
         // Tries to set look and feel to windows
