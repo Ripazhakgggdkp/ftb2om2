@@ -6,10 +6,8 @@
 package com.ftb2om2.ftb2om2;
 
 import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
@@ -18,9 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
@@ -128,11 +124,6 @@ public class MainWindow extends javax.swing.JFrame {
         outputField.setDragEnabled(true);
 
         difficultyField.setDragEnabled(true);
-        difficultyField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                difficultyFieldActionPerformed(evt);
-            }
-        });
 
         browseDifficulty.setText("...");
         browseDifficulty.addActionListener(new java.awt.event.ActionListener() {
@@ -234,55 +225,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel8.setText("Artist");
 
-        titleField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleFieldActionPerformed(evt);
-            }
-        });
-
-        unicodeTitleField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unicodeTitleFieldActionPerformed(evt);
-            }
-        });
-
-        artistField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                artistFieldActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Artist Unicode:");
-
-        creatorField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creatorFieldActionPerformed(evt);
-            }
-        });
 
         jLabel10.setText("Creator:");
 
-        unicodeArtistField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unicodeArtistFieldActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Version (Difficulty) :");
 
-        versionField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                versionFieldActionPerformed(evt);
-            }
-        });
-
         jLabel12.setText("Source:");
-
-        sourceField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sourceFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -463,10 +412,6 @@ public class MainWindow extends javax.swing.JFrame {
         difficultyField.setText(file.GetPath(false, false, false));
     }//GEN-LAST:event_browseDifficultyActionPerformed
 
-    private void difficultyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_difficultyFieldActionPerformed
-
-    }//GEN-LAST:event_difficultyFieldActionPerformed
-
     private void BrowseAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseAudioActionPerformed
         PathGetter file = new PathGetter();
         String path = file.GetPath(false, true, false);
@@ -515,34 +460,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_createDifficultyActionPerformed
 
-    private void sourceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sourceFieldActionPerformed
-
-    private void versionFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_versionFieldActionPerformed
-
-    private void unicodeArtistFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unicodeArtistFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_unicodeArtistFieldActionPerformed
-
-    private void creatorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatorFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_creatorFieldActionPerformed
-
-    private void artistFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artistFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_artistFieldActionPerformed
-
-    private void unicodeTitleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unicodeTitleFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_unicodeTitleFieldActionPerformed
-
-    private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleFieldActionPerformed
-
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             audioField.setText(getDragAndDropPath(evt));
@@ -551,7 +468,7 @@ public class MainWindow extends javax.swing.JFrame {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void difficultyFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             difficultyField.setText(getDragAndDropPath(evt));
@@ -559,12 +476,12 @@ public class MainWindow extends javax.swing.JFrame {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void outputFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             outputField.setText(getDragAndDropPath(evt));
         } catch (Exception ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);            
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -572,7 +489,7 @@ public class MainWindow extends javax.swing.JFrame {
         MP3TagWrapper mp3 = new MP3TagWrapper();
         try {
             mp3.fillTags(path);
-        } catch (IOException|InvalidDataException ex) {
+        } catch (IOException | InvalidDataException ex) {
             JOptionPane.showMessageDialog(rootPane, "Your file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);
         } catch (UnsupportedTagException ex) {
             JOptionPane.showMessageDialog(rootPane, "Your selected mp3 has unsupported tags, autofill won't work!", "Unsupported Tags!", JOptionPane.PLAIN_MESSAGE);
@@ -582,7 +499,7 @@ public class MainWindow extends javax.swing.JFrame {
             artistField.setText(mp3.getArtist());
             unicodeArtistField.setText(mp3.getUnicodeArtist());
         }
-    }     
+    }
 
     public static void main(String args[]) {
         // Tries to set look and feel to windows
