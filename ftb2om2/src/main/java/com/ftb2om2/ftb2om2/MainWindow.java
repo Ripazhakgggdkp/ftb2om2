@@ -417,16 +417,21 @@ public class MainWindow extends javax.swing.JFrame {
         difficultyField.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent evt) {
                 difficultyFieldDragAndDrop(evt);
-            }            
+            }
+        });
+        outputField.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                outputFieldDragAndDrop(evt);
+            }
         });
     }
-    
+
     public String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
         evt.acceptDrop(DnDConstants.ACTION_COPY);
-            List<File> droppedFile = (List<File>) evt
-                    .getTransferable()
-                    .getTransferData(DataFlavor.javaFileListFlavor);
-            return droppedFile.get(0).getAbsolutePath();                
+        List<File> droppedFile = (List<File>) evt
+                .getTransferable()
+                .getTransferData(DataFlavor.javaFileListFlavor);
+        return droppedFile.get(0).getAbsolutePath();
     }
 
     private void handleError(IOException e) {
@@ -466,23 +471,8 @@ public class MainWindow extends javax.swing.JFrame {
         PathGetter file = new PathGetter();
         String path = file.GetPath(false, true, false);
         audioField.setText(path);
-
         if (file.isApproved()) {
-            MP3TagWrapper mp3 = new MP3TagWrapper();
-            try {
-                mp3.fillTags(path);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Your selected file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);
-            } catch (UnsupportedTagException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Unsupported Tags!", "Your selected mp3 has unsupported tags, autofill won't work!", JOptionPane.PLAIN_MESSAGE);
-            } catch (InvalidDataException ex) {
-                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                titleField.setText(mp3.getTitle());
-                unicodeTitleField.setText(mp3.getUnicodeTitle());
-                artistField.setText(mp3.getArtist());
-                unicodeArtistField.setText(mp3.getUnicodeArtist());
-            }
+            autoFill(path);
         }
     }//GEN-LAST:event_BrowseAudioActionPerformed
 
@@ -556,6 +546,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             audioField.setText(getDragAndDropPath(evt));
+            autoFill(audioField.getText());
         } catch (Exception ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -564,11 +555,38 @@ public class MainWindow extends javax.swing.JFrame {
     private void difficultyFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             difficultyField.setText(getDragAndDropPath(evt));
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void outputFieldDragAndDrop(DropTargetDropEvent evt) {
+        try {
+            outputField.setText(getDragAndDropPath(evt));
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+    }
+
+    private void autoFill(String path) {
+        MP3TagWrapper mp3 = new MP3TagWrapper();
+        try {
+            mp3.fillTags(path);
+        } catch (IOException|InvalidDataException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Your file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);
+        } catch (UnsupportedTagException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Your selected mp3 has unsupported tags, autofill won't work!", "Unsupported Tags!", JOptionPane.PLAIN_MESSAGE);
+        } finally {
+            titleField.setText(mp3.getTitle());
+            unicodeTitleField.setText(mp3.getUnicodeTitle());
+            artistField.setText(mp3.getArtist());
+            unicodeArtistField.setText(mp3.getUnicodeArtist());
+        }
+    }
+
+    
+    
+    
 
     public static void main(String args[]) {
         // Tries to set look and feel to windows
