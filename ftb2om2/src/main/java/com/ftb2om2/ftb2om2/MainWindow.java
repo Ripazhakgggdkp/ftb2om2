@@ -13,6 +13,9 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,11 +105,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4.setText("Audio (.mp3)");
 
         audioField.setDragEnabled(true);
-        audioField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                audioFieldActionPerformed(evt);
-            }
-        });
 
         BrowseAudio.setText("...");
         BrowseAudio.addActionListener(new java.awt.event.ActionListener() {
@@ -421,10 +419,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BrowseAudioActionPerformed
 
-    private void audioFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_audioFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_audioFieldActionPerformed
-
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
         Converter converter = new Converter();
         Metadata metadata = new Metadata();
@@ -438,6 +432,8 @@ public class MainWindow extends javax.swing.JFrame {
                 converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(), metadata);
                 zip.createOSZ(audioField.getText(), difficultyField.getText(), outputField.getText(), outputName.getText());
                 JOptionPane.showMessageDialog(rootPane, "File converted succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+                Path path = FileSystems.getDefault().getPath(outputField.getText(), outputName.getText()+".osu");
+                Files.deleteIfExists(path);
             } catch (IOException e) {
                 handleError(e);
             }
