@@ -1,3 +1,8 @@
+--Please wait for a new version!--
+=========
+
+I´ll be updating it to output osu file format v14 soon!
+
 psoon: 'The great ftb converter that will bring you to your climax"
 =========
 
