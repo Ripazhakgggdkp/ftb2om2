@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class Converter {
 
-    private Reader reader;
-    private Writer writer;
+    private final Reader reader;
+    private final Writer writer;
 
     private String name;
 
