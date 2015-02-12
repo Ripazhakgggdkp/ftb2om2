@@ -4,5 +4,5 @@ import java.io.File;
 import java.io.IOException;
 
 public interface Writer {
-    public void write(File osuFile, Metadata metadata) throws IOException;    
+    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, Reader reader) throws IOException;    
 }

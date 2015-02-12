@@ -3,17 +3,18 @@ package com.ftb2om2.ftb2om2;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.LinkedList;
+import java.util.List;
 
-public class OsuManiaV14 extends Converter {
+public class OsuManiaV14 implements Writer {
+
+    private OutputStreamWriter streamWriter;
 
     @Override
-    public void Write(File osuFile, Metadata metadata) throws IOException {
+    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, Reader reader) throws IOException {
 
         //Adds Top "General" Section to the difficulty file
         AppendTopGeneralInfo(osuFile, metadata);
@@ -22,6 +23,9 @@ public class OsuManiaV14 extends Converter {
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
         StringBuilder sb;
         streamWriter.write("[TimingPoints]\n");
+        
+        List<BPM> bpms = reader.getBpms();
+        
         for (BPM bpm : bpms) {
             sb = new StringBuilder();
             sb.append(bpm.getMs().longValue());
@@ -31,6 +35,8 @@ public class OsuManiaV14 extends Converter {
             sb.append(",4,1,0," + hitsoundVolume + ",1,0\n");
             streamWriter.write(sb.toString());
         }
+        List<Multiplier> multipliers = reader.getMultipliers();
+        
         for (Multiplier multiplier : multipliers) {
             sb = new StringBuilder();
             sb.append(multiplier.getMs().longValue());
@@ -42,11 +48,13 @@ public class OsuManiaV14 extends Converter {
         }
         streamWriter.write("\n\n");
         streamWriter.close();
-
+        
         //Adds color header
         AppendBottomGeneralInfo(osuFile, metadata);
-        
+
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
+        
+        List<Note> notes = reader.getNotes();
 
         //Adds converted Hit Objects
         streamWriter.write("[HitObjects]\n");
@@ -108,9 +116,9 @@ public class OsuManiaV14 extends Converter {
         InputStreamReader isr = new InputStreamReader(topHeaders);
         BufferedReader read = new BufferedReader(isr);
         String line;
-        
+
         streamWriter.write("osu file format v14\n\n");
-        
+
         while ((line = read.readLine()) != null) {
             streamWriter.write(line + "\n");
         }

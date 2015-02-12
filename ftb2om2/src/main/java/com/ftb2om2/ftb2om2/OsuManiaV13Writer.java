@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class OsuManiaV13Writer implements Writer {
     
-    private Integer hitsoundVolume;    
     private OutputStreamWriter streamWriter;
 
     private void AppendGeneralInfo(File osuFile, Metadata metadata) throws IOException {
@@ -58,7 +58,7 @@ public class OsuManiaV13Writer implements Writer {
     }
 
     @Override
-    public void write(File osuFile, Metadata metadata) throws IOException {
+    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, Reader reader) throws IOException {
         //Adds "General" Section to the difficulty file
         AppendGeneralInfo(osuFile, metadata);
 
@@ -66,15 +66,21 @@ public class OsuManiaV13Writer implements Writer {
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
         StringBuilder sb;
         streamWriter.write("[TimingPoints]\n");
+        
+        List<BPM> bpms = reader.getBpms();
+        
         for (BPM bpm : bpms) {
             sb = new StringBuilder();
             sb.append(bpm.getMs().longValue());
             sb.append(",");
             //Osu style bpm by dividing 60000
             sb.append((60000 / ((bpm.getBpm() > 0) ? bpm.getBpm() : 15)));
-            sb.append(",4,1,0," + hitsoundVolume + ",1,0\n");
+            sb.append(",4,1,0,").append(hitsoundVolume).append(",1,0\n");
             streamWriter.write(sb.toString());
         }
+        
+        List<Multiplier> multipliers = reader.getMultipliers();
+        
         for (Multiplier multiplier : multipliers) {
             sb = new StringBuilder();
             sb.append(multiplier.getMs().longValue());
@@ -85,6 +91,8 @@ public class OsuManiaV13Writer implements Writer {
             streamWriter.write(sb.toString());
         }
         streamWriter.write("\n\n");
+        
+        List<Note> notes = reader.getNotes();
 
         //Adds converted Hit Objects
         streamWriter.write("[HitObjects]\n");

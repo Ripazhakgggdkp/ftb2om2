@@ -71,7 +71,22 @@ public class FtbAirReader implements Reader {
             }
         } else {
             throw new IOException("The file isn't the correct format!");
-        }        
+        }
         reader.close();
+    }
+
+    @Override
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    @Override
+    public List<Multiplier> getMultipliers() {
+        return multipliers;
+    }
+    
+    @Override
+    public List<BPM> getBpms() {
+        return bpms;
     }
 }
