@@ -79,6 +79,8 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         sourceField = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
+        File = new javax.swing.JMenu();
+        OldToggle = new javax.swing.JCheckBoxMenuItem();
         About = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -329,6 +331,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        File.setText("File");
+
+        OldToggle.setText("Use old file format");
+        File.add(OldToggle);
+
+        jMenuBar2.add(File);
+
         About.setText("About");
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon.jpg"))); // NOI18N
@@ -420,7 +429,14 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BrowseAudioActionPerformed
 
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
-        Converter converter = new OsuManiaV14();
+        Converter converter;
+        if (OldToggle.getState()) {
+            converter = new OsuManiaV13();
+        }
+        else {
+            converter = new OsuManiaV14();            
+        }
+        
         Metadata metadata = new Metadata();
         fillMetadata(metadata);
         Zipper zip = new Zipper();
@@ -441,12 +457,20 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_createOsuFileActionPerformed
 
     private void createDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultyActionPerformed
+        Converter converter;
+        if (OldToggle.getState()) {
+            converter = new OsuManiaV13();
+        }
+        else {
+            converter = new OsuManiaV14();            
+        }
+        
+        Metadata metadata = new Metadata();
+        fillMetadata(metadata);
+        
         if (outputName.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            Converter converter = new OsuManiaV14();
-            Metadata metadata = new Metadata();
-            fillMetadata(metadata);
+        } else {            
             try {
                 converter.Convert(difficultyField.getText(), outputField.getText(), outputName.getText(), (Integer) hitsoundVolume.getModel().getValue(), metadata);
                 JOptionPane.showMessageDialog(rootPane, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
@@ -531,6 +555,8 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu About;
     private javax.swing.JButton BrowseAudio;
+    private javax.swing.JMenu File;
+    private javax.swing.JCheckBoxMenuItem OldToggle;
     private javax.swing.JTextField artistField;
     private javax.swing.JTextField audioField;
     private javax.swing.JButton browseDifficulty;
