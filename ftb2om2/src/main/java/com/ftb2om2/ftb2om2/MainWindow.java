@@ -420,7 +420,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BrowseAudioActionPerformed
 
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
-        Converter converter = new Converter();
+        Converter converter = new OsuManiaV14();
         Metadata metadata = new Metadata();
         fillMetadata(metadata);
         Zipper zip = new Zipper();
@@ -444,7 +444,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (outputName.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Converter converter = new Converter();
+            Converter converter = new OsuManiaV14();
             Metadata metadata = new Metadata();
             fillMetadata(metadata);
             try {
