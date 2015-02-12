@@ -3,7 +3,7 @@ package com.ftb2om2.ftb2om2;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class Converter {
+public class Converter {
 
     private Reader reader;
     private Writer writer;
@@ -15,11 +15,11 @@ public abstract class Converter {
         this.writer = writer;
     }
 
-    public void Convert(String inputFile, String outputFile, String name, Integer volume, Metadata metadata) throws IOException {
+    public void Convert(String inputFilePath, String outputFilePath, String name, Integer volume, Metadata metadata) throws IOException {
         this.name = name;
-        File ftbFile = new File(inputFile);
-        File osuFile = new File(outputFile + "\\" + name + ".osu");
-        reader.read(ftbFile);
-        writer.write(osuFile, metadata, volume, reader);
+        File inputFile = new File(inputFilePath);
+        File outputFile = new File(outputFilePath + "\\" + name + ".osu");
+        reader.read(inputFile);
+        writer.write(outputFile, metadata, volume, reader);
     }
 }
