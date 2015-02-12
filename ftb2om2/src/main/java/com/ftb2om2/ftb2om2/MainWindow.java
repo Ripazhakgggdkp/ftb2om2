@@ -431,7 +431,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
         Converter converter;
         if (OldToggle.getState()) {
-            converter = new OsuManiaV13();
+            converter = new OsuManiaV13Writer();
         }
         else {
             converter = new OsuManiaV14();            
@@ -459,7 +459,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void createDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultyActionPerformed
         Converter converter;
         if (OldToggle.getState()) {
-            converter = new OsuManiaV13();
+            converter = new OsuManiaV13Writer();
         }
         else {
             converter = new OsuManiaV14();            

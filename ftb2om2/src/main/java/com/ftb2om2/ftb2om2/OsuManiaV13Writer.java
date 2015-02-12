@@ -3,23 +3,67 @@ package com.ftb2om2.ftb2om2;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.LinkedList;
 
-public class OsuManiaV13 extends Converter {
+public class OsuManiaV13Writer implements Writer {
     
-    @Override
-    public void Write(File osuFile, Metadata metadata) throws IOException {
+    private Integer hitsoundVolume;    
+    private OutputStreamWriter streamWriter;
 
+    private void AppendGeneralInfo(File osuFile, Metadata metadata) throws IOException {
+        streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, false), "UTF-8");
+        InputStream topHeaders = getClass().getResourceAsStream("/TopHeaders");
+        InputStreamReader isr = new InputStreamReader(topHeaders);
+        BufferedReader read = new BufferedReader(isr);
+        String line;
+
+        streamWriter.write("osu file format v13\n\n");
+
+        while ((line = read.readLine()) != null) {
+            streamWriter.write(line + "\n");
+        }
+
+        streamWriter.write("\n");
+
+        streamWriter.write("[Metadata]\n");
+        streamWriter.write("Title:" + metadata.getTitle() + "\n");
+        streamWriter.write("TitleUnicode:" + metadata.getUnicodeTitle() + "\n");
+        streamWriter.write("Artist:" + metadata.getArtist() + "\n");
+        streamWriter.write("ArtistUnicode:" + metadata.getUnicodeArtist() + "\n");
+        streamWriter.write("Creator:" + metadata.getCreator() + "\n");
+        streamWriter.write("Version:" + metadata.getVersion() + "\n");
+        streamWriter.write("Source:" + metadata.getSource() + "\n");
+        streamWriter.write("Tags:\n");
+        streamWriter.write("BeatmapID:0\n");
+        streamWriter.write("BeatmapSetID:-1\n");
+
+        streamWriter.write("\n");
+
+        InputStream bottomHeaders = getClass().getResourceAsStream("/BottomHeaders");
+        isr = new InputStreamReader(bottomHeaders);
+        read = new BufferedReader(isr);
+
+        while ((line = read.readLine()) != null) {
+            streamWriter.write(line + "\n");
+        }
+
+        streamWriter.write("\n");
+        streamWriter.write("\n");
+
+        read.close();
+        streamWriter.close();
+    }
+
+    @Override
+    public void write(File osuFile, Metadata metadata) throws IOException {
         //Adds "General" Section to the difficulty file
         AppendGeneralInfo(osuFile, metadata);
-        
+
         //Adds converted Timing Points
-        streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile,true),"UTF-8");
+        streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
         StringBuilder sb;
         streamWriter.write("[TimingPoints]\n");
         for (BPM bpm : bpms) {
@@ -37,11 +81,11 @@ public class OsuManiaV13 extends Converter {
             sb.append(",-");
             //Osu style SV
             sb.append((1 / ((multiplier.getMultiplier() > 0) ? multiplier.getMultiplier() : 0.10) * 100));
-            sb.append(",4,1,0," + hitsoundVolume + ",0,0\n");
+            sb.append(",4,1,0,").append(hitsoundVolume).append(",0,0\n");
             streamWriter.write(sb.toString());
         }
         streamWriter.write("\n\n");
-        
+
         //Adds converted Hit Objects
         streamWriter.write("[HitObjects]\n");
         for (Note note : notes) {
@@ -93,50 +137,6 @@ public class OsuManiaV13 extends Converter {
             sb.append("\n");
             streamWriter.write(sb.toString());
         }
-        streamWriter.close();
-    }
-
-    private void AppendGeneralInfo(File osuFile, Metadata metadata) throws IOException {
-        streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile,false),"UTF-8");
-        InputStream topHeaders = getClass().getResourceAsStream("/TopHeaders");
-        InputStreamReader isr = new InputStreamReader(topHeaders);
-        BufferedReader read = new BufferedReader(isr);
-        String line;
-        
-        streamWriter.write("osu file format v13\n\n");        
-        
-        while ((line = read.readLine()) != null) {
-            streamWriter.write(line + "\n");
-        }        
-
-        streamWriter.write("\n");
-        
-        streamWriter.write("[Metadata]\n");
-        streamWriter.write("Title:" + metadata.getTitle() + "\n");
-        streamWriter.write("TitleUnicode:" +metadata.getUnicodeTitle() + "\n");
-        streamWriter.write("Artist:" +metadata.getArtist() + "\n");
-        streamWriter.write("ArtistUnicode:" +metadata.getUnicodeArtist() + "\n");
-        streamWriter.write("Creator:" +metadata.getCreator() + "\n");
-        streamWriter.write("Version:" +metadata.getVersion() + "\n");
-        streamWriter.write("Source:" +metadata.getSource() + "\n");
-        streamWriter.write("Tags:\n");
-        streamWriter.write("BeatmapID:0\n");
-        streamWriter.write("BeatmapSetID:-1\n");
-
-        streamWriter.write("\n");
-
-        InputStream bottomHeaders = getClass().getResourceAsStream("/BottomHeaders");
-        isr = new InputStreamReader(bottomHeaders);
-        read = new BufferedReader(isr);
-
-        while ((line = read.readLine()) != null) {
-            streamWriter.write(line + "\n");
-        }
-
-        streamWriter.write("\n");
-        streamWriter.write("\n");
-        
-        read.close();
         streamWriter.close();
     }
 }
