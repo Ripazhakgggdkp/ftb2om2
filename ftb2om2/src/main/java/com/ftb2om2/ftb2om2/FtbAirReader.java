@@ -9,8 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,7 +82,7 @@ public class FtbAirReader implements Reader {
     public List<Multiplier> getMultipliers() {
         return multipliers;
     }
-    
+
     @Override
     public List<BPM> getBpms() {
         return bpms;
