@@ -431,10 +431,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
         Converter converter;
         if (OldToggle.getState()) {
-            converter = new OsuManiaV13Writer();
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV13Writer = new OsuManiaV13Writer();
+            converter = new Converter(ftbReader, osuManiaV13Writer);
         }
         else {
-            converter = new OsuManiaV14();            
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV14Writer = new OsuManiaV14Writer();
+            converter = new Converter(ftbReader, osuManiaV14Writer);          
         }
         
         Metadata metadata = new Metadata();
@@ -459,10 +463,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void createDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultyActionPerformed
         Converter converter;
         if (OldToggle.getState()) {
-            converter = new OsuManiaV13Writer();
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV13Writer = new OsuManiaV13Writer();
+            converter = new Converter(ftbReader, osuManiaV13Writer);
         }
         else {
-            converter = new OsuManiaV14();            
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV14Writer = new OsuManiaV14Writer();
+            converter = new Converter(ftbReader, osuManiaV14Writer);
         }
         
         Metadata metadata = new Metadata();
