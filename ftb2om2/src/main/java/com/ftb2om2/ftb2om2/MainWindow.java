@@ -16,13 +16,17 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 public class MainWindow extends javax.swing.JFrame {
+    
+    List<Difficulty> difficulties = new LinkedList<>();
 
     public MainWindow() {
         initComponents();
@@ -74,10 +78,10 @@ public class MainWindow extends javax.swing.JFrame {
         sourceField = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        difficultyTable = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        audioField1 = new javax.swing.JTextField();
+        audioField2 = new javax.swing.JTextField();
         BrowseAudio1 = new javax.swing.JButton();
         removeDifficulty = new javax.swing.JButton();
         addDifficulty = new javax.swing.JButton();
@@ -338,7 +342,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Single", jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        difficultyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -354,14 +358,14 @@ public class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        difficultyTable.setToolTipText("");
+        jScrollPane1.setViewportView(difficultyTable);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Required"));
 
         jLabel13.setText("Audio (.mp3)");
 
-        audioField1.setDragEnabled(true);
+        audioField2.setDragEnabled(true);
 
         BrowseAudio1.setText("...");
         BrowseAudio1.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +382,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(audioField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(audioField2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BrowseAudio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -386,7 +390,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(audioField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(audioField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(BrowseAudio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13))
         );
@@ -590,7 +594,14 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BrowseAudio1ActionPerformed
 
     private void addDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDifficultyActionPerformed
-        // TODO add your handling code here:
+        PathGetter file = new PathGetter();
+        String name = file.GetPath(false, false, false);
+        File fileName = new File(name);
+                
+        difficulties.add(new Difficulty(fileName.getName(), name, false));
+        DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+        
+        model.addRow(new Object[]{fileName.getName(),name,"Not Converted"});
     }//GEN-LAST:event_addDifficultyActionPerformed
 
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
@@ -674,13 +685,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton addDifficulty;
     private javax.swing.JTextField artistField;
     private javax.swing.JTextField audioField;
-    private javax.swing.JTextField audioField1;
+    private javax.swing.JTextField audioField2;
     private javax.swing.JButton browseDifficulty;
     private javax.swing.JButton browseOutput;
     private javax.swing.JButton createDifficulty;
     private javax.swing.JButton createOsuFile;
     private javax.swing.JTextField creatorField;
     private javax.swing.JTextField difficultyField;
+    private javax.swing.JTable difficultyTable;
     private javax.swing.JSpinner hitsoundVolume;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -705,7 +717,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField outputField;
     private javax.swing.JTextField outputName;
     private javax.swing.JButton removeDifficulty;

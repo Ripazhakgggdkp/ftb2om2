@@ -525,7 +525,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="difficultyTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="3" rowCount="0">
@@ -572,7 +572,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="39" max="32767" attributes="0"/>
-                          <Component id="audioField1" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="audioField2" min="-2" pref="183" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="BrowseAudio1" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -582,7 +582,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="audioField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="audioField2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BrowseAudio1" alignment="3" max="32767" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -595,7 +595,7 @@
                     <Property name="text" type="java.lang.String" value="Audio (.mp3)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="audioField1">
+                <Component class="javax.swing.JTextField" name="audioField2">
                   <Properties>
                     <Property name="dragEnabled" type="boolean" value="true"/>
                   </Properties>
