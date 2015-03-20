@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -58,9 +59,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         jLabel14 = new javax.swing.JLabel();
         outputFolder = new javax.swing.JTextField();
         BrowseAudio2 = new javax.swing.JButton();
-        outputName2 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        BrowseAudio3 = new javax.swing.JButton();
         createDifficulties = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -94,17 +92,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             }
         });
 
-        outputName2.setDragEnabled(true);
-
-        jLabel15.setText("Output Name");
-
-        BrowseAudio3.setText("...");
-        BrowseAudio3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BrowseAudio3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -113,44 +100,31 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(outputName2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BrowseAudio3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addComponent(audioFieldMulti, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(BrowseAudio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                            .addComponent(outputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(BrowseAudio2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(audioFieldMulti, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BrowseAudio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(outputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BrowseAudio2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(BrowseAudio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BrowseAudio2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(outputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(audioFieldMulti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13)))
+                .addComponent(BrowseAudio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(outputName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(BrowseAudio3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(BrowseAudio2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(audioFieldMulti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel13))
         );
 
         createDifficulties.setText("Create Difficulties");
@@ -167,15 +141,22 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
             },
             new String [] {
-                "Name", "Path", "Status"
+                "Name", "Path", "Output Name"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         difficultyTable.setToolTipText("");
@@ -240,9 +221,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addComponent(createDifficulties)
                 .addContainerGap())
         );
@@ -255,12 +236,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     }//GEN-LAST:event_BrowseAudio1ActionPerformed
 
     private void BrowseAudio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseAudio2ActionPerformed
-        // TODO add your handling code here:
+        PathGetter file = new PathGetter();
+        outputFolder.setText(file.GetPath(false, false, true));
     }//GEN-LAST:event_BrowseAudio2ActionPerformed
-
-    private void BrowseAudio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseAudio3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BrowseAudio3ActionPerformed
 
     private void createDifficultiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultiesActionPerformed
         
@@ -271,16 +249,23 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
         Metadata metadata = new Metadata();
         //fillMetadata(metadata);
-
-        if (outputName2.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(jPanel6, "Your file needs a name!", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        
+        DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+        List<List<Object>> data = model.getDataVector();
+        
+        Boolean valid = true;
+                 
+        for (List row : data) {
+            if (row.get(2).toString().isEmpty() && valid == true) {
+                JOptionPane.showMessageDialog(jPanel6, "Difficulty " + row.get(1).toString() + " Has no output name!", "Error", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+            }
+        }
+        
+        if (valid) {
             try {
-                DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
-                List<List<Object>> data = model.getDataVector();
-
                 for (List row : data) {
-                    converter.Convert(row.get(1).toString(), outputFolder.getText(), outputName2.getText(), 100 /*hitsoundmodel*/, metadata);
+                    converter.Convert(row.get(1).toString(), outputFolder.getText(), row.get(2).toString(), 100 /*hitsoundmodel*/, metadata);
                 }
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
@@ -296,7 +281,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
         DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
 
-        model.addRow(new Object[]{fileName.getName(), name, "Not Converted"});
+        model.addRow(new Object[]{fileName.getName(), name, FilenameUtils.removeExtension(fileName.getName())});
     }//GEN-LAST:event_addDifficultyActionPerformed
 
     private void removeDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDifficultyActionPerformed
@@ -314,20 +299,17 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseAudio1;
     private javax.swing.JButton BrowseAudio2;
-    private javax.swing.JButton BrowseAudio3;
     private javax.swing.JButton addDifficulty;
     private javax.swing.JTextField audioFieldMulti;
     private javax.swing.JButton createDifficulties;
     private javax.swing.JTable difficultyTable;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField outputFolder;
-    private javax.swing.JTextField outputName2;
     private javax.swing.JButton removeDifficulty;
     // End of variables declaration//GEN-END:variables
 }
