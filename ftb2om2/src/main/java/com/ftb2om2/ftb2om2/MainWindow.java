@@ -5,6 +5,9 @@
  */
 package com.ftb2om2.ftb2om2;
 
+import com.ftb2om2.model.Metadata;
+import com.ftb2om2.util.PathGetter;
+import com.ftb2om2.util.Zipper;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import java.awt.datatransfer.DataFlavor;
