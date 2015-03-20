@@ -1,5 +1,7 @@
 package com.ftb2om2.ftb2om2;
+
 public class BPM {
+
     private Double ms;
     private Double bpm;
 
@@ -25,5 +27,5 @@ public class BPM {
 
     public void setBpm(Double bpm) {
         this.bpm = bpm;
-    }    
+    }
 }
