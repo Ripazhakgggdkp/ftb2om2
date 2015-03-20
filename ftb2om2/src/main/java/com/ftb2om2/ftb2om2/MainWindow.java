@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,8 +28,6 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 public class MainWindow extends javax.swing.JFrame {
-    
-    List<Difficulty> difficulties = new LinkedList<>();
 
     public MainWindow() {
         initComponents();
@@ -396,6 +397,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         removeDifficulty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Minus-24.png"))); // NOI18N
+        removeDifficulty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeDifficultyActionPerformed(evt);
+            }
+        });
 
         addDifficulty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add-New-24.png"))); // NOI18N
         addDifficulty.addActionListener(new java.awt.event.ActionListener() {
@@ -597,12 +603,22 @@ public class MainWindow extends javax.swing.JFrame {
         PathGetter file = new PathGetter();
         String name = file.GetPath(false, false, false);
         File fileName = new File(name);
-                
-        difficulties.add(new Difficulty(fileName.getName(), name, false));
+
         DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
-        
-        model.addRow(new Object[]{fileName.getName(),name,"Not Converted"});
+
+        model.addRow(new Object[]{fileName.getName(), name, "Not Converted"});
     }//GEN-LAST:event_addDifficultyActionPerformed
+
+    private void removeDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDifficultyActionPerformed
+        int[] rows = difficultyTable.getSelectedRows();
+
+        DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+        Arrays.sort(rows);
+        for (int i = rows.length - 1; i >= 0; i--) {
+            model.removeRow(rows[i]);
+            model.fireTableRowsDeleted(rows[i], rows[i]);
+        }
+    }//GEN-LAST:event_removeDifficultyActionPerformed
 
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
