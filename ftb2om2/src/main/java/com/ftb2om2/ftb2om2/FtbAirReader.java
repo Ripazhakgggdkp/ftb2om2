@@ -1,5 +1,8 @@
 package com.ftb2om2.ftb2om2;
 
+import com.ftb2om2.model.Multiplier;
+import com.ftb2om2.model.Note;
+import com.ftb2om2.model.BPM;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

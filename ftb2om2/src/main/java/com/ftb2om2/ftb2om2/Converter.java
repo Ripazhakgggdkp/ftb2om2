@@ -1,5 +1,6 @@
 package com.ftb2om2.ftb2om2;
 
+import com.ftb2om2.model.Metadata;
 import java.io.File;
 import java.io.IOException;
 
