@@ -35,7 +35,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Feel The Beats to osu!mania");
-        setResizable(false);
 
         jTabbedPane1.setToolTipText("");
 
@@ -43,7 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(singlePane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+            .addComponent(singlePane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,6 +64,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Multiple", jPanel5);
 
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
         File.setText("File");
 
         OldToggle.setText("Use old file format");
@@ -81,17 +82,6 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar2.add(About);
 
         setJMenuBar(jMenuBar2);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
