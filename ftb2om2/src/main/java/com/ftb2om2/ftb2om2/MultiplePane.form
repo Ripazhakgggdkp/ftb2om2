@@ -171,6 +171,9 @@
                 <TitledBorder title="Difficulties"/>
               </Border>
             </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[83, 190]"/>
+            </Property>
           </Properties>
 
           <Layout>
