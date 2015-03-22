@@ -39,6 +39,7 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
      */
     public SinglePane() {
         initComponents();
+        dragAndDrop();
     }
     
     public void setObject(Object bean) {
@@ -71,21 +72,7 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         hitsoundVolume = new javax.swing.JSpinner();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        titleField = new javax.swing.JTextField();
-        unicodeTitleField = new javax.swing.JTextField();
-        artistField = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        creatorField = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        unicodeArtistField = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        versionField = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        sourceField = new javax.swing.JTextField();
+        mP3TagsPane1 = new com.ftb2om2.ftb2om2.MP3TagsPane();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -218,88 +205,6 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
                 .addComponent(hitsoundVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("MP3 Tags"));
-
-        jLabel6.setText("Title:");
-
-        jLabel7.setText("Unicode Title:");
-
-        jLabel8.setText("Artist");
-
-        jLabel9.setText("Artist Unicode:");
-
-        jLabel10.setText("Creator:");
-
-        jLabel11.setText("Version (Difficulty) :");
-
-        jLabel12.setText("Source:");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(63, 63, 63)
-                        .addComponent(sourceField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(artistField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(unicodeTitleField)
-                            .addComponent(titleField)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(creatorField)
-                            .addComponent(unicodeArtistField)
-                            .addComponent(versionField))))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(unicodeTitleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(artistField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(unicodeArtistField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(creatorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(versionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(sourceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -308,13 +213,13 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(createDifficulty)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(createOsuFile))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
+            .addComponent(mP3TagsPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,8 +227,8 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(mP3TagsPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -370,13 +275,13 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
     }
 
     private void fillMetadata(Metadata metadata) {
-        metadata.setTitle(titleField.getText());
-        metadata.setUnicodeTitle(unicodeTitleField.getText());
-        metadata.setArtist(artistField.getText());
-        metadata.setUnicodeArtist(unicodeArtistField.getText());
-        metadata.setCreator(creatorField.getText());
-        metadata.setVersion(versionField.getText());
-        metadata.setSource(sourceField.getText());
+        metadata.setTitle(mP3TagsPane1.getTitleField());
+        metadata.setUnicodeTitle(mP3TagsPane1.getUnicodeTitleField());
+        metadata.setArtist(mP3TagsPane1.getArtistField());
+        metadata.setUnicodeArtist(mP3TagsPane1.getUnicodeArtistField());
+        metadata.setCreator(mP3TagsPane1.getCreatorField());
+        metadata.setVersion(mP3TagsPane1.getVersionField());
+        metadata.setSource(mP3TagsPane1.getSourceField());
     }
 
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
@@ -413,10 +318,7 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
         } catch (UnsupportedTagException ex) {
             JOptionPane.showMessageDialog(jPanel1, "Your selected mp3 has unsupported tags, autofill won't work!", "Unsupported Tags!", JOptionPane.PLAIN_MESSAGE);
         } finally {
-            titleField.setText(mp3.getTitle());
-            unicodeTitleField.setText(mp3.getUnicodeTitle());
-            artistField.setText(mp3.getArtist());
-            unicodeArtistField.setText(mp3.getUnicodeArtist());
+            mP3TagsPane1.setTags(mp3.getArtist(), "", "", mp3.getTitle(), mp3.getUnicodeArtist(), mp3.getUnicodeTitle(), "");
         }
     }
     
@@ -501,37 +403,23 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseAudio;
-    private javax.swing.JTextField artistField;
     private javax.swing.JTextField audioField;
     private javax.swing.JButton browseDifficulty;
     private javax.swing.JButton browseOutput;
     private javax.swing.JButton createDifficulty;
     private javax.swing.JButton createOsuFile;
-    private javax.swing.JTextField creatorField;
     private javax.swing.JTextField difficultyField;
     private javax.swing.JSpinner hitsoundVolume;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private com.ftb2om2.ftb2om2.MP3TagsPane mP3TagsPane1;
     private javax.swing.JTextField outputField;
     private javax.swing.JTextField outputName;
-    private javax.swing.JTextField sourceField;
-    private javax.swing.JTextField titleField;
-    private javax.swing.JTextField unicodeArtistField;
-    private javax.swing.JTextField unicodeTitleField;
-    private javax.swing.JTextField versionField;
     // End of variables declaration//GEN-END:variables
 }
