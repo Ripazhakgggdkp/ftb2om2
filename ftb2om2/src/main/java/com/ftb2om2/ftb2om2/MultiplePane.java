@@ -135,6 +135,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Difficulties"));
+        jPanel7.setMinimumSize(new java.awt.Dimension(83, 190));
 
         difficultyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
