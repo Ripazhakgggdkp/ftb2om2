@@ -5,11 +5,17 @@
  */
 package com.ftb2om2.ftb2om2;
 
+import com.ftb2om2.model.Difficulty;
 import com.ftb2om2.model.Metadata;
+import com.ftb2om2.util.MP3TagWrapper;
 import com.ftb2om2.util.PathGetter;
+import com.ftb2om2.util.Zipper;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -66,6 +72,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         addDifficulty = new javax.swing.JButton();
         removeDifficulty = new javax.swing.JButton();
         mP3TagsPane1 = new com.ftb2om2.ftb2om2.MP3TagsPane();
+        createOsuFile = new javax.swing.JButton();
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Required"));
 
@@ -202,6 +209,13 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     .addComponent(removeDifficulty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        createOsuFile.setText("Create Osu! File");
+        createOsuFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createOsuFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -214,7 +228,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(createDifficulties)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createOsuFile)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -227,7 +242,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mP3TagsPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(createDifficulties)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createDifficulties)
+                    .addComponent(createOsuFile))
                 .addContainerGap())
         );
 
@@ -243,8 +260,26 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void autoFill(String path) {
+        MP3TagWrapper mp3 = new MP3TagWrapper();
+        try {
+            mp3.fillTags(path);
+        } catch (IOException | InvalidDataException ex) {
+            JOptionPane.showMessageDialog(jPanel6, "Your file isn't an mp3!", "Unexpected File", JOptionPane.PLAIN_MESSAGE);
+        } catch (UnsupportedTagException ex) {
+            JOptionPane.showMessageDialog(jPanel6, "Your selected mp3 has unsupported tags, autofill won't work!", "Unsupported Tags!", JOptionPane.PLAIN_MESSAGE);
+        } finally {
+            mP3TagsPane1.setTags(mp3.getArtist(), "", "", mp3.getTitle(), mp3.getUnicodeArtist(), mp3.getUnicodeTitle(), "");
+        }
+    }
+
     private void BrowseAudio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseAudio1ActionPerformed
-        // TODO add your handling code here:
+        PathGetter file = new PathGetter();
+        String path = file.GetPath(false, true, false);
+        audioFieldMulti.setText(path);
+        if (file.isApproved()) {
+            autoFill(path);
+        }
     }//GEN-LAST:event_BrowseAudio1ActionPerformed
 
     private void BrowseAudio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseAudio2ActionPerformed
@@ -253,27 +288,32 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     }//GEN-LAST:event_BrowseAudio2ActionPerformed
 
     private void createDifficultiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultiesActionPerformed
-        
+
         Converter converter;
         Reader ftbReader = new FtbAirReader();
-        Writer osuManiaV13Writer = new OsuManiaV13Writer();
-        converter = new Converter(ftbReader, osuManiaV13Writer);
+        Writer osuManiaV14Writer = new OsuManiaV14Writer();
+        converter = new Converter(ftbReader, osuManiaV14Writer);
 
-        Metadata metadata = new Metadata();
-        //fillMetadata(metadata);
-        
+        Metadata metadata = new Metadata(mP3TagsPane1.getArtistField(),
+                mP3TagsPane1.getUnicodeArtistField(),
+                mP3TagsPane1.getArtistField(),
+                mP3TagsPane1.getUnicodeArtistField(),
+                mP3TagsPane1.getCreatorField(),
+                mP3TagsPane1.getVersionField(),
+                mP3TagsPane1.getSourceField());
+
         DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
         List<List<Object>> data = model.getDataVector();
-        
+
         Boolean valid = true;
-                 
+
         for (List row : data) {
             if (row.get(2).toString().isEmpty() && valid == true) {
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty " + row.get(1).toString() + " Has no output name!", "Error", JOptionPane.ERROR_MESSAGE);
                 valid = false;
             }
         }
-        
+
         if (valid) {
             try {
                 for (List row : data) {
@@ -290,9 +330,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         PathGetter file = new PathGetter();
         String name = file.GetPath(false, false, false);
         if (name != null) {
-            File fileName = new File(name);            
-            DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();            
-            model.addRow(new Object[]{fileName.getName(), name, FilenameUtils.removeExtension(fileName.getName())});        
+            File fileName = new File(name);
+            DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+            model.addRow(new Object[]{fileName.getName(), name, FilenameUtils.removeExtension(fileName.getName())});
         }
     }//GEN-LAST:event_addDifficultyActionPerformed
 
@@ -307,6 +347,57 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         }
     }//GEN-LAST:event_removeDifficultyActionPerformed
 
+    private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
+        Converter converter;
+        Reader ftbReader = new FtbAirReader();
+        Writer osuManiaV14Writer = new OsuManiaV14Writer();
+        converter = new Converter(ftbReader, osuManiaV14Writer);
+
+        Metadata metadata = new Metadata(mP3TagsPane1.getArtistField(),
+                mP3TagsPane1.getUnicodeArtistField(),
+                mP3TagsPane1.getArtistField(),
+                mP3TagsPane1.getUnicodeArtistField(),
+                mP3TagsPane1.getCreatorField(),
+                mP3TagsPane1.getVersionField(),
+                mP3TagsPane1.getSourceField());
+
+        DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+        List<List<Object>> data = model.getDataVector();
+
+        Boolean valid = true;
+
+        for (List row : data) {
+            if (row.get(2).toString().isEmpty() && valid == true) {
+                JOptionPane.showMessageDialog(jPanel6,
+                        "Difficulty " + row.get(1).toString() + " Has no output name!",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                valid = false;
+            }
+        }
+
+        if (valid) {
+            try {
+                List<Difficulty> difficulties = new LinkedList<>();
+                Zipper zipper = new Zipper();
+                for (List row : data) {
+                    converter.Convert(row.get(1).toString(),
+                            outputFolder.getText(),
+                            row.get(2).toString(),
+                            100 /*hitsoundmodel*/,
+                            metadata);
+                    difficulties.add(new Difficulty(row.get(2).toString(),
+                            outputFolder.getText(),
+                            row.get(2).toString()));
+                }
+                zipper.createOSZNew(audioFieldMulti.getText(), outputFolder.getText(), difficulties);
+
+                JOptionPane.showMessageDialog(jPanel6, "Difficulties created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+            } catch (IOException e) {
+                //handleError(e);
+            }
+        }
+    }//GEN-LAST:event_createOsuFileActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseAudio1;
@@ -314,6 +405,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     private javax.swing.JButton addDifficulty;
     private javax.swing.JTextField audioFieldMulti;
     private javax.swing.JButton createDifficulties;
+    private javax.swing.JButton createOsuFile;
     private javax.swing.JTable difficultyTable;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

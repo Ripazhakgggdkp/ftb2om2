@@ -20,6 +20,7 @@ public class Converter {
         this.name = name;
         File inputFile = new File(inputFilePath);
         File outputFile = new File(outputFilePath + "\\" + name + ".osu");
+        reader.clear();
         reader.read(inputFile);
         writer.write(outputFile, metadata, volume, reader);
     }

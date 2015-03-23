@@ -35,31 +35,31 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
     }
 
     public String getArtistField() {
-        return artistField.toString();
+        return artistField.getText();
     }
 
     public String getCreatorField() {
-        return creatorField.toString();
+        return creatorField.getText();
     }
 
     public String getSourceField() {
-        return sourceField.toString();
+        return sourceField.getText();
     }
 
     public String getTitleField() {
-        return titleField.toString();
+        return titleField.getText();
     }
 
     public String getUnicodeArtistField() {
-        return unicodeArtistField.toString();
+        return unicodeArtistField.getText();
     }
 
     public String getUnicodeTitleField() {
-        return unicodeTitleField.toString();
+        return unicodeTitleField.getText();
     }
 
     public String getVersionField() {
-        return versionField.toString();
+        return versionField.getText();
     }
        
     /**

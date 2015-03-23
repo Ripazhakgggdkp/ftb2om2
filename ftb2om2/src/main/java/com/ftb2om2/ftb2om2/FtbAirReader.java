@@ -81,4 +81,13 @@ public class FtbAirReader implements Reader {
     public List<BPM> getBpms() {
         return bpms;
     }
+    
+    @Override
+    public void clear() {
+        name = "";
+        notes.clear();
+        bpms.clear();
+        hitsoundVolume = 0;
+        multipliers.clear();
+    }
 }
