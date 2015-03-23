@@ -360,7 +360,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 mP3TagsPane1.getArtistField(),
                 mP3TagsPane1.getUnicodeArtistField(),
                 mP3TagsPane1.getCreatorField(),
-                mP3TagsPane1.getVersionField(),
                 mP3TagsPane1.getSourceField());
 
         DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
@@ -381,7 +380,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     converter.Convert(row.get(1).toString(),
                             outputFolder.getText(),
                             row.get(2).toString(),
-                            Integer.parseInt(hitsoundVolume.getModel().getValue().toString()), metadata);
+                            Integer.parseInt(hitsoundVolume.getModel().getValue().toString()),
+                            metadata);
                 }
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
@@ -422,7 +422,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 mP3TagsPane1.getArtistField(),
                 mP3TagsPane1.getUnicodeArtistField(),
                 mP3TagsPane1.getCreatorField(),
-                mP3TagsPane1.getVersionField(),
                 mP3TagsPane1.getSourceField());
 
         DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();

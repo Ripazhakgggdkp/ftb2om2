@@ -8,7 +8,6 @@ public class Converter {
 
     private final Reader reader;
     private final Writer writer;
-
     private String name;
 
     public Converter(Reader reader, Writer writer) {
@@ -22,6 +21,6 @@ public class Converter {
         File outputFile = new File(outputFilePath + "\\" + name + ".osu");
         reader.clear();
         reader.read(inputFile);
-        writer.write(outputFile, metadata, volume, reader);
+        writer.write(outputFile, metadata, volume, name, reader);
     }
 }

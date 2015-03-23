@@ -18,10 +18,10 @@ public class OsuManiaV14Writer implements Writer {
     private OutputStreamWriter streamWriter;
 
     @Override
-    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, Reader reader) throws IOException {
+    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, String difficultyName, Reader reader) throws IOException {
 
         //Adds Top "General" Section to the difficulty file
-        AppendTopGeneralInfo(osuFile, metadata);
+        AppendTopGeneralInfo(osuFile, metadata, difficultyName);
 
         //Adds converted Timing Points
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
@@ -114,7 +114,7 @@ public class OsuManiaV14Writer implements Writer {
         streamWriter.close();
     }
 
-    private void AppendTopGeneralInfo(File osuFile, Metadata metadata) throws IOException {
+    private void AppendTopGeneralInfo(File osuFile, Metadata metadata, String difficultyName) throws IOException {
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, false), "UTF-8");
         InputStream topHeaders = getClass().getResourceAsStream("/TopHeaders");
         InputStreamReader isr = new InputStreamReader(topHeaders);
@@ -135,7 +135,7 @@ public class OsuManiaV14Writer implements Writer {
         streamWriter.write("Artist:" + metadata.getArtist() + "\n");
         streamWriter.write("ArtistUnicode:" + metadata.getUnicodeArtist() + "\n");
         streamWriter.write("Creator:" + metadata.getCreator() + "\n");
-        streamWriter.write("Version:" + metadata.getVersion() + "\n");
+        streamWriter.write("Version:" + difficultyName + "\n");
         streamWriter.write("Source:" + metadata.getSource() + "\n");
         streamWriter.write("Tags:\n");
         streamWriter.write("BeatmapID:0\n");
