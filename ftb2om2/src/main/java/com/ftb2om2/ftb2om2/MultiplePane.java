@@ -311,7 +311,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             JOptionPane.showMessageDialog(jPanel6, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
         try {
             audioFieldMulti.setText(getDragAndDropPath(evt));
@@ -320,7 +320,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void autoFill(String path) {
         MP3TagWrapper mp3 = new MP3TagWrapper();
         try {
@@ -381,8 +381,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     converter.Convert(row.get(1).toString(),
                             outputFolder.getText(),
                             row.get(2).toString(),
-                            Integer.parseInt(hitsoundVolume.getModel().getValue().toString())
-                            , metadata);
+                            Integer.parseInt(hitsoundVolume.getModel().getValue().toString()), metadata);
                 }
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
@@ -430,7 +429,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         List<List<Object>> data = model.getDataVector();
 
         Boolean valid = true;
-        
 
         for (List row : data) {
             if (row.get(2).toString().isEmpty() && valid == true) {
@@ -449,15 +447,18 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     converter.Convert(row.get(1).toString(),
                             outputFolder.getText(),
                             row.get(2).toString(),
-                            Integer.parseInt(hitsoundVolume.getModel().toString()),
+                            Integer.parseInt(hitsoundVolume.getValue().toString()),
                             metadata);
+                    
                     difficulties.add(new Difficulty(row.get(2).toString(),
                             outputFolder.getText(),
                             row.get(2).toString()));
                 }
                 zipper.createOSZ(audioFieldMulti.getText(), outputFolder.getText(), difficulties);
 
-                JOptionPane.showMessageDialog(jPanel6, "Difficulties created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(jPanel6,
+                        "Difficulties created succesfully!", "Success!",
+                        JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
                 handleError(e);
             }
