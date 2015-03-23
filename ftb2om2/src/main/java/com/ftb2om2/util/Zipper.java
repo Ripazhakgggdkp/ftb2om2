@@ -22,17 +22,6 @@ import org.apache.commons.io.FilenameUtils;
 
 public class Zipper {
 
-    public void createOSZ(String mp3Path, String difficultyPath, String outputPath, String fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(outputPath + "\\" + fileName + ".osz");
-        ZipOutputStream zos = new ZipOutputStream(fos);
-
-        addToZip(mp3Path, "Audio.mp3", zos);
-        addToZip(outputPath + "\\" + fileName + ".osu", "Difficulty.osu", zos);
-
-        zos.close();
-        fos.close();
-    }
-
     private void addToZip(String path, String name, ZipOutputStream zos) throws IOException {
         File file = new File(path);
         FileInputStream fis = new FileInputStream(file);
@@ -48,7 +37,7 @@ public class Zipper {
         fis.close();
     }
     
-    public void createOSZNew(String mp3Path, String outputPath, List<Difficulty> difficulty) throws IOException {
+    public void createOSZ(String mp3Path, String outputPath, List<Difficulty> difficulty) throws IOException {
         FileOutputStream fos = new FileOutputStream(outputPath + "\\" + FilenameUtils.getBaseName(mp3Path) + ".osz");
         ZipOutputStream zos = new ZipOutputStream(fos);
         
