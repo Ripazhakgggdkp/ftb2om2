@@ -1,11 +1,5 @@
 package com.ftb2om2.model;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 public class Metadata {
     private String title;
     private String unicodeTitle;
