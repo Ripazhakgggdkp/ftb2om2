@@ -169,6 +169,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             }
         });
         difficultyTable.setToolTipText("");
+        difficultyTable.setDragEnabled(true);
         jScrollPane1.setViewportView(difficultyTable);
 
         addDifficulty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Add-New-24.png"))); // NOI18N
@@ -294,6 +295,11 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 audioFieldDragAndDrop(evt);
             }
         });
+        jScrollPane1.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                difficultyTableDragAndDrop(evt);
+            }
+        });
     }
 
     private String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
@@ -318,6 +324,20 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             autoFill(audioFieldMulti.getText());
         } catch (Exception ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void difficultyTableDragAndDrop(DropTargetDropEvent evt) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
+            evt.acceptDrop(DnDConstants.ACTION_COPY);
+            List<File> droppedFile = (List<File>) evt
+                .getTransferable()
+                .getTransferData(DataFlavor.javaFileListFlavor);
+            droppedFile.forEach(file -> 
+                    model.addRow(new Object[]{file.getName(), file.getPath(),FilenameUtils.getBaseName(file.getPath())}));
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);            
         }
     }
 
