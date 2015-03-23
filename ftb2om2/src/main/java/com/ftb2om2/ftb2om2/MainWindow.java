@@ -22,55 +22,17 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        singlePane1 = new com.ftb2om2.ftb2om2.SinglePane();
-        jPanel5 = new javax.swing.JPanel();
-        multiplePane1 = new com.ftb2om2.ftb2om2.MultiplePane();
+        multiplePane2 = new com.ftb2om2.ftb2om2.MultiplePane();
         jMenuBar2 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
-        OldToggle = new javax.swing.JCheckBoxMenuItem();
         About = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Feel The Beats to osu!mania");
-
-        jTabbedPane1.setToolTipText("");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(singlePane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(singlePane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Single", jPanel1);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(multiplePane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(multiplePane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Multiple", jPanel5);
-
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(multiplePane2, java.awt.BorderLayout.CENTER);
 
         File.setText("File");
-
-        OldToggle.setText("Use old file format");
-        File.add(OldToggle);
-
         jMenuBar2.add(File);
 
         About.setText("About");
@@ -111,13 +73,8 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu About;
     private javax.swing.JMenu File;
-    private javax.swing.JCheckBoxMenuItem OldToggle;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private com.ftb2om2.ftb2om2.MultiplePane multiplePane1;
-    private com.ftb2om2.ftb2om2.SinglePane singlePane1;
+    private com.ftb2om2.ftb2om2.MultiplePane multiplePane2;
     // End of variables declaration//GEN-END:variables
 }
