@@ -16,4 +16,6 @@ public interface Reader {
     public List<Multiplier> getMultipliers();
 
     public List<Note> getNotes();
+    
+    public void clear();
 }

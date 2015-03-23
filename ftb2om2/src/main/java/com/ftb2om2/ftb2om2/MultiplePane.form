@@ -39,7 +39,8 @@
                       <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="createDifficulties" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="createOsuFile" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +57,10 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="mP3TagsPane1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="createDifficulties" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="createDifficulties" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="createOsuFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -255,6 +259,14 @@
           </SubComponents>
         </Container>
         <Component class="com.ftb2om2.ftb2om2.MP3TagsPane" name="mP3TagsPane1">
+        </Component>
+        <Component class="javax.swing.JButton" name="createOsuFile">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Create Osu! File"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createOsuFileActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
