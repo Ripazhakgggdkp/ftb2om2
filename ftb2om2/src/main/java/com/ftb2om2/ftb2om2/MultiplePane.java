@@ -12,11 +12,17 @@ import com.ftb2om2.util.PathGetter;
 import com.ftb2om2.util.Zipper;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.io.FilenameUtils;
@@ -34,21 +40,13 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
      */
     public MultiplePane() {
         initComponents();
+        dragAndDrop();
     }
 
     public void setObject(Object bean) {
         this.bean = bean;
     }
 
-    /*private void fillMetadata(Metadata metadata) {
-     metadata.setTitle(titleField.getText());
-     metadata.setUnicodeTitle(unicodeTitleField.getText());
-     metadata.setArtist(artistField.getText());
-     metadata.setUnicodeArtist(unicodeArtistField.getText());
-     metadata.setCreator(creatorField.getText());
-     metadata.setVersion(versionField.getText());
-     metadata.setSource(sourceField.getText());
-     }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +71,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         removeDifficulty = new javax.swing.JButton();
         mP3TagsPane1 = new com.ftb2om2.ftb2om2.MP3TagsPane();
         createOsuFile = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        hitsoundVolume = new javax.swing.JSpinner();
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Required"));
 
@@ -202,7 +203,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addDifficulty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,19 +217,44 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             }
         });
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Extra"));
+
+        jLabel5.setText("Hitsound Volume");
+
+        hitsoundVolume.setModel(new javax.swing.SpinnerNumberModel(100, 0, 100, 1));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hitsoundVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel5)
+                .addComponent(hitsoundVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mP3TagsPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mP3TagsPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addComponent(createDifficulties)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                         .addComponent(createOsuFile)))
                 .addContainerGap())
         );
@@ -241,7 +267,9 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mP3TagsPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createDifficulties)
                     .addComponent(createOsuFile))
@@ -260,6 +288,39 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void dragAndDrop() {
+        audioFieldMulti.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                audioFieldDragAndDrop(evt);
+            }
+        });
+    }
+
+    private String getDragAndDropPath(DropTargetDropEvent evt) throws Exception {
+        evt.acceptDrop(DnDConstants.ACTION_COPY);
+        List<File> droppedFile = (List<File>) evt
+                .getTransferable()
+                .getTransferData(DataFlavor.javaFileListFlavor);
+        return droppedFile.get(0).getAbsolutePath();
+    }
+
+    private void handleError(IOException e) {
+        if (e.getMessage() == null || e.getMessage().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(jPanel6, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(jPanel6, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void audioFieldDragAndDrop(DropTargetDropEvent evt) {
+        try {
+            audioFieldMulti.setText(getDragAndDropPath(evt));
+            autoFill(audioFieldMulti.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void autoFill(String path) {
         MP3TagWrapper mp3 = new MP3TagWrapper();
         try {
@@ -294,8 +355,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         Writer osuManiaV14Writer = new OsuManiaV14Writer();
         converter = new Converter(ftbReader, osuManiaV14Writer);
 
-        Metadata metadata = new Metadata(mP3TagsPane1.getArtistField(),
-                mP3TagsPane1.getUnicodeArtistField(),
+        Metadata metadata = new Metadata(mP3TagsPane1.getTitleField(),
+                mP3TagsPane1.getUnicodeTitleField(),
                 mP3TagsPane1.getArtistField(),
                 mP3TagsPane1.getUnicodeArtistField(),
                 mP3TagsPane1.getCreatorField(),
@@ -317,11 +378,15 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         if (valid) {
             try {
                 for (List row : data) {
-                    converter.Convert(row.get(1).toString(), outputFolder.getText(), row.get(2).toString(), 100 /*hitsoundmodel*/, metadata);
+                    converter.Convert(row.get(1).toString(),
+                            outputFolder.getText(),
+                            row.get(2).toString(),
+                            Integer.parseInt(hitsoundVolume.getModel().getValue().toString())
+                            , metadata);
                 }
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
-                //handleError(e);
+                handleError(e);
             }
         }
     }//GEN-LAST:event_createDifficultiesActionPerformed
@@ -353,8 +418,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         Writer osuManiaV14Writer = new OsuManiaV14Writer();
         converter = new Converter(ftbReader, osuManiaV14Writer);
 
-        Metadata metadata = new Metadata(mP3TagsPane1.getArtistField(),
-                mP3TagsPane1.getUnicodeArtistField(),
+        Metadata metadata = new Metadata(mP3TagsPane1.getTitleField(),
+                mP3TagsPane1.getUnicodeTitleField(),
                 mP3TagsPane1.getArtistField(),
                 mP3TagsPane1.getUnicodeArtistField(),
                 mP3TagsPane1.getCreatorField(),
@@ -365,6 +430,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         List<List<Object>> data = model.getDataVector();
 
         Boolean valid = true;
+        
 
         for (List row : data) {
             if (row.get(2).toString().isEmpty() && valid == true) {
@@ -383,17 +449,17 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                     converter.Convert(row.get(1).toString(),
                             outputFolder.getText(),
                             row.get(2).toString(),
-                            100 /*hitsoundmodel*/,
+                            Integer.parseInt(hitsoundVolume.getModel().toString()),
                             metadata);
                     difficulties.add(new Difficulty(row.get(2).toString(),
                             outputFolder.getText(),
                             row.get(2).toString()));
                 }
-                zipper.createOSZNew(audioFieldMulti.getText(), outputFolder.getText(), difficulties);
+                zipper.createOSZ(audioFieldMulti.getText(), outputFolder.getText(), difficulties);
 
                 JOptionPane.showMessageDialog(jPanel6, "Difficulties created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
-                //handleError(e);
+                handleError(e);
             }
         }
     }//GEN-LAST:event_createOsuFileActionPerformed
@@ -407,8 +473,11 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     private javax.swing.JButton createDifficulties;
     private javax.swing.JButton createOsuFile;
     private javax.swing.JTable difficultyTable;
+    private javax.swing.JSpinner hitsoundVolume;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
