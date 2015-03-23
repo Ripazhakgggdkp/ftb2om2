@@ -9,6 +9,7 @@ package com.ftb2om2.ftb2om2;
  *
  * @author Jamil
  */
+
 import com.ftb2om2.model.Metadata;
 import com.ftb2om2.util.MP3TagWrapper;
 import com.ftb2om2.util.PathGetter;
@@ -30,7 +31,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class SinglePane extends javax.swing.JPanel implements java.beans.Customizer {
-
+    
     private Object bean;
 
     /**
@@ -40,7 +41,7 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
         initComponents();
         dragAndDrop();
     }
-
+    
     public void setObject(Object bean) {
         this.bean = bean;
     }
@@ -245,7 +246,7 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void dragAndDrop() {
         audioField.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent evt) {
@@ -327,12 +328,18 @@ public class SinglePane extends javax.swing.JPanel implements java.beans.Customi
             mP3TagsPane1.setTags(mp3.getArtist(), "", "", mp3.getTitle(), mp3.getUnicodeArtist(), mp3.getUnicodeTitle(), "");
         }
     }
-
+    
     private void createDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultyActionPerformed
         Converter converter;
-        Reader ftbReader = new FtbAirReader();
-        Writer osuManiaV14Writer = new OsuManiaV14Writer();
-        converter = new Converter(ftbReader, osuManiaV14Writer);
+        if (false) { //Change to toggle in menubar
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV13Writer = new OsuManiaV13Writer();
+            converter = new Converter(ftbReader, osuManiaV13Writer);
+        } else {
+            Reader ftbReader = new FtbAirReader();
+            Writer osuManiaV14Writer = new OsuManiaV14Writer();
+            converter = new Converter(ftbReader, osuManiaV14Writer);
+        }
 
         Metadata metadata = new Metadata();
         fillMetadata(metadata);

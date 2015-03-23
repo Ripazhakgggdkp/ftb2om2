@@ -73,9 +73,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         removeDifficulty = new javax.swing.JButton();
         mP3TagsPane1 = new com.ftb2om2.ftb2om2.MP3TagsPane();
         createOsuFile = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        hitsoundVolume = new javax.swing.JSpinner();
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Required"));
 
@@ -219,30 +216,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Extra"));
-
-        jLabel5.setText("Hitsound Volume");
-
-        hitsoundVolume.setModel(new javax.swing.SpinnerNumberModel(100, 0, 100, 1));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(hitsoundVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel5)
-                .addComponent(hitsoundVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -250,7 +223,6 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mP3TagsPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -269,9 +241,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mP3TagsPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createDifficulties)
                     .addComponent(createOsuFile))
@@ -347,25 +317,14 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         if (valid) {
             try {
                 for (List row : data) {
-                    converter.Convert(row.get(1).toString(),
-                            outputFolder.getText(),
-                            row.get(2).toString(),
-                            Integer.parseInt(hitsoundVolume.getValue().toString()), metadata);
+                    converter.Convert(row.get(1).toString(), outputFolder.getText(), row.get(2).toString(), 100 /*hitsoundmodel*/, metadata);
                 }
                 JOptionPane.showMessageDialog(jPanel6, "Difficulty created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
-                handleError(e);
+                //handleError(e);
             }
         }
     }//GEN-LAST:event_createDifficultiesActionPerformed
-
-    private void handleError(IOException e) {
-        if (e.getMessage() == null || e.getMessage().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(jPanel6, "File not found!", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(jPanel6, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     private void addDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDifficultyActionPerformed
         PathGetter file = new PathGetter();
@@ -434,7 +393,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
                 JOptionPane.showMessageDialog(jPanel6, "Difficulties created succesfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
             } catch (IOException e) {
-                handleError(e);
+                //handleError(e);
             }
         }
     }//GEN-LAST:event_createOsuFileActionPerformed
@@ -448,11 +407,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     private javax.swing.JButton createDifficulties;
     private javax.swing.JButton createOsuFile;
     private javax.swing.JTable difficultyTable;
-    private javax.swing.JSpinner hitsoundVolume;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
