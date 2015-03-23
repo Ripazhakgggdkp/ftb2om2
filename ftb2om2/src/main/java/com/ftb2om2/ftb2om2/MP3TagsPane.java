@@ -31,7 +31,6 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
         this.titleField.setText(titleField);
         this.unicodeArtistField.setText(unicodeArtistField);
         this.unicodeTitleField.setText(unicodeTitleField);
-        this.versionField.setText(versionField);
     }
 
     public String getArtistField() {
@@ -57,10 +56,6 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
     public String getUnicodeTitleField() {
         return unicodeTitleField.getText();
     }
-
-    public String getVersionField() {
-        return versionField.getText();
-    }
        
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,8 +76,6 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
         creatorField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         unicodeArtistField = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        versionField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         sourceField = new javax.swing.JTextField();
 
@@ -100,8 +93,6 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
 
         jLabel10.setText("Creator:");
 
-        jLabel11.setText("Version (Difficulty) :");
-
         jLabel12.setText("Source:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -112,29 +103,27 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(63, 63, 63)
-                        .addComponent(sourceField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(unicodeTitleField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(unicodeTitleField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                             .addComponent(artistField)
                             .addComponent(titleField)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel9))
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(versionField)
                             .addComponent(creatorField)
-                            .addComponent(unicodeArtistField))))
+                            .addComponent(unicodeArtistField)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(63, 63, 63)
+                        .addComponent(sourceField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -161,12 +150,8 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
                     .addComponent(creatorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(versionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(sourceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sourceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,7 +163,6 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
     private javax.swing.JTextField artistField;
     private javax.swing.JTextField creatorField;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -189,6 +173,5 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
     private javax.swing.JTextField titleField;
     private javax.swing.JTextField unicodeArtistField;
     private javax.swing.JTextField unicodeTitleField;
-    private javax.swing.JTextField versionField;
     // End of variables declaration//GEN-END:variables
 }

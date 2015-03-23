@@ -12,19 +12,17 @@ public class Metadata {
     private String artist;
     private String unicodeArtist;
     private String creator;
-    private String version;
     private String source;
 
     public Metadata() {
     }
 
-    public Metadata(String title, String unicodeTitle, String artist, String unicodeArtist, String creator, String version, String source) {
+    public Metadata(String title, String unicodeTitle, String artist, String unicodeArtist, String creator,String source) {
         this.title = title;
         this.unicodeTitle = unicodeTitle;
         this.artist = artist;
         this.unicodeArtist = unicodeArtist;
         this.creator = creator;
-        this.version = version;
         this.source = source;
     }
 
@@ -67,15 +65,7 @@ public class Metadata {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
+    
     public String getSource() {
         return source;
     }
