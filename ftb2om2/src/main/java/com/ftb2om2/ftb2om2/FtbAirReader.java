@@ -32,34 +32,52 @@ public class FtbAirReader implements Reader {
         String line = reader.readLine();
         String[] vars = line.split(" ");
 
-        if (vars[0].equalsIgnoreCase("$~DIFF")) {
-            while (!(line = reader.readLine()).equalsIgnoreCase("!~BPMS")) {
+        if ("$~DIFF".equalsIgnoreCase(vars[0])) {
+
+            line = reader.readLine();
+            while (!"!~BPMS".equalsIgnoreCase(line)) {
+                line = reader.readLine();
             }
-            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+
+            line = reader.readLine();
+            while (!"!~END".equalsIgnoreCase(line)) {
                 vars = line.split(" ");
                 BPM bpm = new BPM();
                 bpm.setMs(Double.parseDouble(vars[0]));
                 bpm.setBpm(Double.parseDouble(vars[1]));
                 bpms.add(bpm);
+                line = reader.readLine();
             }
-            while (!reader.readLine().equalsIgnoreCase("!~SPEEDS")) {
+
+            line = reader.readLine();
+            while (!"!~SPEEDS".equalsIgnoreCase(line)) {
+                line = reader.readLine();
             }
-            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+            
+            line = reader.readLine();
+            while (!"!~END".equalsIgnoreCase(line)){
                 vars = line.split(" ");
                 Multiplier multiplier = new Multiplier();
                 multiplier.setMs(Double.parseDouble(vars[0]));
                 multiplier.setMultiplier(Double.parseDouble(vars[1]));
                 multipliers.add(multiplier);
+                line = reader.readLine();
             }
-            while (!reader.readLine().equalsIgnoreCase("!~NOTES")) {
+
+            line = reader.readLine();
+            while (!"!~NOTES".equalsIgnoreCase(line)) {
+                line = reader.readLine();
             }
-            while (!(line = reader.readLine()).equalsIgnoreCase("!~END")) {
+
+            line = reader.readLine();
+            while (!"!~END".equalsIgnoreCase(line)) {
                 vars = line.split(" ");
                 Note note = new Note();
                 note.setMs(Double.parseDouble(vars[0]));
                 note.setDuration(Double.parseDouble(vars[1]));
                 note.setLane(Short.parseShort(vars[2]));
                 notes.add(note);
+                line = reader.readLine();
             }
         } else {
             throw new IOException("The file isn't the correct format!");
@@ -81,7 +99,7 @@ public class FtbAirReader implements Reader {
     public List<BPM> getBpms() {
         return bpms;
     }
-    
+
     @Override
     public void clear() {
         name = "";

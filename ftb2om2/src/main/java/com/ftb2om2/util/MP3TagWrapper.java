@@ -1,5 +1,6 @@
 package com.ftb2om2.util;
 
+import com.ftb2om2.exception.TagException;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -17,7 +18,8 @@ public class MP3TagWrapper {
     public MP3TagWrapper() {
     }
 
-    public void fillTags(String path) throws IOException, UnsupportedTagException, InvalidDataException {
+    public void fillTags(String path) throws TagException {
+        try {
         Mp3File mp3 = new Mp3File(path);
         if (mp3.hasId3v1Tag()) {
             ID3v1 id3v1Tag = mp3.getId3v1Tag();
@@ -33,6 +35,10 @@ public class MP3TagWrapper {
             artist = id3v2Tag.getArtist();
             unicodeArtist = id3v2Tag.getArtist();
         }
+        }
+        catch (IOException | UnsupportedTagException | InvalidDataException ex) {
+            throw new TagException("Unable to find tags in mp3", ex);
+       }
     }
 
     public String getTitle() {
