@@ -11,7 +11,7 @@ package com.ftb2om2.ftb2om2;
  */
 public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Customizer {
     
-    private Object bean;
+    private transient Object bean;
 
     /**
      * Creates new customizer MP3TagsPane
@@ -20,11 +20,12 @@ public class MP3TagsPane extends javax.swing.JPanel implements java.beans.Custom
         initComponents();
     }
     
+    @Override
     public void setObject(Object bean) {
         this.bean = bean;
     }
 
-    public void setTags(String artistField, String creatorField, String sourceField, String titleField, String unicodeArtistField, String unicodeTitleField, String versionField) {
+    public void setTags(String artistField, String creatorField, String sourceField, String titleField, String unicodeArtistField, String unicodeTitleField) {
         this.artistField.setText(artistField);
         this.creatorField.setText(creatorField);
         this.sourceField.setText(sourceField);

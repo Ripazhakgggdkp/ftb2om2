@@ -35,8 +35,8 @@ public class OsuManiaV14Writer implements Writer {
             sb.append(bpm.getMs().longValue());
             sb.append(",");
             //Osu style bpm by dividing 60000
-            sb.append((60000 / ((bpm.getBpm() > 0) ? bpm.getBpm() : 15)));
-            sb.append(",4,1,0," + hitsoundVolume + ",1,0\n");
+            sb.append(60000 / ((bpm.getBpm() > 0) ? bpm.getBpm() : 15));
+            sb.append(",4,1,0,").append(hitsoundVolume).append(",1,0\n");
             streamWriter.write(sb.toString());
         }
         List<Multiplier> multipliers = reader.getMultipliers();
@@ -46,15 +46,15 @@ public class OsuManiaV14Writer implements Writer {
             sb.append(multiplier.getMs().longValue());
             sb.append(",-");
             //Osu style SV
-            sb.append((1 / ((multiplier.getMultiplier() > 0) ? multiplier.getMultiplier() : 0.10) * 100));
-            sb.append(",4,1,0," + hitsoundVolume + ",0,0\n");
+            sb.append(1 / ((multiplier.getMultiplier() > 0) ? multiplier.getMultiplier() : 0.10) * 100);
+            sb.append(",4,1,0,").append(hitsoundVolume).append(",0,0\n");
             streamWriter.write(sb.toString());
         }
         streamWriter.write("\n\n");
         streamWriter.close();
         
         //Adds color header
-        AppendBottomGeneralInfo(osuFile, metadata);
+        AppendBottomGeneralInfo(osuFile);
 
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
         
@@ -88,6 +88,8 @@ public class OsuManiaV14Writer implements Writer {
                 case 6:
                     osuLane = 475;
                     break;
+                default:
+                    throw new UnsupportedOperationException("This writer does not support more than 7 lanes");
             }
             sb.append(osuLane);
             sb.append(",192,");
@@ -158,7 +160,7 @@ public class OsuManiaV14Writer implements Writer {
         streamWriter.close();
     }
 
-    private void AppendBottomGeneralInfo(File osuFile, Metadata metadata) throws IOException {
+    private void AppendBottomGeneralInfo(File osuFile) throws IOException {
         streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
         InputStream colorHeader = getClass().getResourceAsStream("/ColorHeader");
         InputStreamReader isr = new InputStreamReader(colorHeader);

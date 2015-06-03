@@ -11,7 +11,7 @@ public class Difficulty {
     String difficultyPath;
     String difficultyName;
 
-    public Difficulty(String difficultyPath, String outputPath, String fileName) {
+    public Difficulty(String difficultyPath, String fileName) {
         this.difficultyPath = difficultyPath;
         this.difficultyName = fileName;
     }

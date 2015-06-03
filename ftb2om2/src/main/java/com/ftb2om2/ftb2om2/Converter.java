@@ -15,7 +15,7 @@ public class Converter {
         this.writer = writer;
     }
 
-    public void Convert(String inputFilePath, String outputFilePath, String name, Integer volume, Metadata metadata) throws IOException {
+    public void convert(String inputFilePath, String outputFilePath, String name, Integer volume, Metadata metadata) throws IOException {
         this.name = name;
         File inputFile = new File(inputFilePath);
         File outputFile = new File(outputFilePath + "\\" + name + ".osu");
