@@ -1,4 +1,4 @@
-package com.ftb2om2.ftb2om2;
+package com.ftb2om2.reader;
 
 import com.ftb2om2.model.Multiplier;
 import com.ftb2om2.model.Note;
@@ -12,11 +12,9 @@ import java.util.List;
 
 public class FtbAirReader implements Reader {
 
-    private String name;
-    private List<Note> notes;
-    private List<BPM> bpms;
-    private Integer hitsoundVolume;
-    private List<Multiplier> multipliers;
+    private final List<Note> notes;
+    private final List<BPM> bpms;
+    private final List<Multiplier> multipliers;
     private BufferedReader reader;
 
     public FtbAirReader() {
@@ -53,9 +51,9 @@ public class FtbAirReader implements Reader {
             while (!"!~SPEEDS".equalsIgnoreCase(line)) {
                 line = reader.readLine();
             }
-            
+
             line = reader.readLine();
-            while (!"!~END".equalsIgnoreCase(line)){
+            while (!"!~END".equalsIgnoreCase(line)) {
                 vars = line.split(" ");
                 Multiplier multiplier = new Multiplier();
                 multiplier.setMs(Double.parseDouble(vars[0]));
@@ -102,10 +100,8 @@ public class FtbAirReader implements Reader {
 
     @Override
     public void clear() {
-        name = "";
         notes.clear();
         bpms.clear();
-        hitsoundVolume = 0;
         multipliers.clear();
     }
 }

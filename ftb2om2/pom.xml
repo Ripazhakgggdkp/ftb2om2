@@ -16,7 +16,12 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.ftb2om2.ftb2om2.MainWindow</mainClass>
+                            <mainClass>com.ftb2om2.main.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

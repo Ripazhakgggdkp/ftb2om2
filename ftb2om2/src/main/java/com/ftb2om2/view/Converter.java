@@ -1,5 +1,7 @@
-package com.ftb2om2.ftb2om2;
+package com.ftb2om2.view;
 
+import com.ftb2om2.reader.Reader;
+import com.ftb2om2.writer.Writer;
 import com.ftb2om2.model.Metadata;
 import java.io.File;
 import java.io.IOException;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ftb2om2.ftb2om2;
+package com.ftb2om2.view;
 
 import javax.swing.UIManager;
 
@@ -22,7 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        multiplePane1 = new com.ftb2om2.ftb2om2.MultiplePane();
+        multiplePane1 = new com.ftb2om2.view.MultiplePane();
         jMenuBar2 = new javax.swing.JMenuBar();
         About = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -54,32 +54,10 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        // Tries to set look and feel to windows
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-        } catch (ClassNotFoundException |
-                InstantiationException |
-                IllegalAccessException |
-                javax.swing.UnsupportedLookAndFeelException ex) 
-        {
-            java.util.logging.Logger.getLogger(MainWindow.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu About;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private com.ftb2om2.ftb2om2.MultiplePane multiplePane1;
+    private com.ftb2om2.view.MultiplePane multiplePane1;
     // End of variables declaration//GEN-END:variables
 }

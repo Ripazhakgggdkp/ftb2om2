@@ -262,7 +262,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="com.ftb2om2.ftb2om2.MP3TagsPane" name="mP3TagsPane1">
+        <Component class="com.ftb2om2.view.MP3TagsPane" name="mP3TagsPane1">
         </Component>
         <Component class="javax.swing.JButton" name="createOsuFile">
           <Properties>

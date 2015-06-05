@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ftb2om2.ftb2om2;
+package com.ftb2om2.view;
 
+import com.ftb2om2.reader.FtbAirReader;
+import com.ftb2om2.reader.Reader;
+import com.ftb2om2.writer.OsuManiaV14Writer;
+import com.ftb2om2.writer.Writer;
 import com.ftb2om2.exception.TagException;
 import com.ftb2om2.model.Difficulty;
 import com.ftb2om2.model.Metadata;
@@ -71,7 +75,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         difficultyTable = new javax.swing.JTable();
         addDifficulty = new javax.swing.JButton();
         removeDifficulty = new javax.swing.JButton();
-        mP3TagsPane1 = new com.ftb2om2.ftb2om2.MP3TagsPane();
+        mP3TagsPane1 = new com.ftb2om2.view.MP3TagsPane();
         createOsuFile = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -363,7 +367,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
     private void browseAudio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseAudio1ActionPerformed
         PathGetter file = new PathGetter();
-        String path = file.GetPath(false, true, false);
+        String path = file.getPath(false, true, false);
         audioFieldMulti.setText(path);
         if (file.isApproved()) {
             autoFill(path);
@@ -372,7 +376,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
     private void browseAudio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseAudio2ActionPerformed
         PathGetter file = new PathGetter();
-        outputFolder.setText(file.GetPath(false, false, true));
+        outputFolder.setText(file.getPath(false, false, true));
     }//GEN-LAST:event_browseAudio2ActionPerformed
 
     private void createDifficultiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDifficultiesActionPerformed
@@ -419,7 +423,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
     private void addDifficultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDifficultyActionPerformed
         PathGetter file = new PathGetter();
-        String name = file.GetPath(false, false, false);
+        String name = file.getPath(false, false, false);
         if (name != null) {
             File fileName = new File(name);
             DefaultTableModel model = (DefaultTableModel) difficultyTable.getModel();
@@ -508,7 +512,7 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.ftb2om2.ftb2om2.MP3TagsPane mP3TagsPane1;
+    private com.ftb2om2.view.MP3TagsPane mP3TagsPane1;
     private javax.swing.JTextField outputFolder;
     private javax.swing.JButton removeDifficulty;
     // End of variables declaration//GEN-END:variables

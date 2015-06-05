@@ -6,7 +6,6 @@
 package com.ftb2om2.util;
 
 import javax.swing.JFileChooser;
-import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -15,10 +14,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class PathGetter extends JFileChooser {
 
-    private static JFileChooser filechooser;
+    private JFileChooser filechooser;
     private boolean approved = false;
 
-    public String GetPath(boolean saveDialog, boolean mp3, boolean directory) {
+    public String getPath(boolean saveDialog, boolean mp3, boolean directory) {
         filechooser = new JFileChooser();
         FileNameExtensionFilter filter;
 
@@ -35,7 +34,7 @@ public class PathGetter extends JFileChooser {
 
         int status;
 
-        if (saveDialog == true) {
+        if (saveDialog) {
             status = filechooser.showSaveDialog(this);
         } else {
             status = filechooser.showOpenDialog(this);

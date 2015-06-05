@@ -57,7 +57,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.ftb2om2.ftb2om2.MultiplePane" name="multiplePane1">
+    <Component class="com.ftb2om2.view.MultiplePane" name="multiplePane1">
     </Component>
   </SubComponents>
 </Form>
