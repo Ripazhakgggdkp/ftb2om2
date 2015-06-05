@@ -1,0 +1,17 @@
+[General]
+AudioFilename: Audio.mp3
+AudioLeadIn: 0
+PreviewTime: 67933
+Countdown: 0
+SampleSet: None
+StackLeniency: 0.7
+Mode: 3
+LetterboxInBreaks: 0
+SpecialStyle: 0
+WidescreenStoryboard: 0
+
+[Editor]
+DistanceSpacing: 1
+BeatDivisor: 2
+GridSize: 4
+TimelineZoom: 1.7
