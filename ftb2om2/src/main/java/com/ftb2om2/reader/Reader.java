@@ -1,4 +1,4 @@
-package com.ftb2om2.ftb2om2;
+package com.ftb2om2.reader;
 
 import com.ftb2om2.model.Multiplier;
 import com.ftb2om2.model.Note;
