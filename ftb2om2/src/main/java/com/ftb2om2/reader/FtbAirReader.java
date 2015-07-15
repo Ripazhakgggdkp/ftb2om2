@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class FtbAirReader implements Reader {
 
-    private DefaultFormat storage = new DefaultFormat();
+    private final DefaultFormat storage = new DefaultFormat();
     private BufferedReader reader;
 
     public FtbAirReader() {
