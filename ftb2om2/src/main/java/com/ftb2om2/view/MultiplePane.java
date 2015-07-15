@@ -14,6 +14,7 @@ import com.ftb2om2.model.ComboFrom;
 import com.ftb2om2.model.ComboTo;
 import com.ftb2om2.model.Difficulty;
 import com.ftb2om2.model.Metadata;
+import com.ftb2om2.reader.FtbOldReader;
 import com.ftb2om2.util.MP3TagWrapper;
 import com.ftb2om2.util.PathGetter;
 import com.ftb2om2.util.Zipper;
@@ -362,8 +363,8 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
     }
 
     private void initDropdowns() {
-        jComboBox1.setModel(new DefaultComboBoxModel(ComboTo.getDropdown()));
-        jComboBox2.setModel(new DefaultComboBoxModel(ComboFrom.getDropdown()));
+        jComboBox1.setModel(new DefaultComboBoxModel(ComboFrom.getDropdown()));
+        jComboBox2.setModel(new DefaultComboBoxModel(ComboTo.getDropdown()));
     }
 
     private String getDragAndDropPath(DropTargetDropEvent evt) throws IOException, UnsupportedFlavorException {
@@ -443,6 +444,10 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
                 reader = new FtbAirReader();
+                break;
+            case 1:
+                reader = new FtbOldReader();
+                break;
         }
 
         switch (jComboBox2.getSelectedIndex()) {
