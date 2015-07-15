@@ -7,7 +7,7 @@ public class BPM {
 
     public BPM() {
     }
-
+    
     public BPM(Double ms, Double bpm) {
         this.ms = ms;
         this.bpm = bpm;
