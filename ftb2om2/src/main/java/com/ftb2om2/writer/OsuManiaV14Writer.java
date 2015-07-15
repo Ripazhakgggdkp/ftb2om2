@@ -1,11 +1,11 @@
 package com.ftb2om2.writer;
 
 import com.ftb2om2.reader.Reader;
-import com.ftb2om2.writer.Writer;
 import com.ftb2om2.model.Metadata;
 import com.ftb2om2.model.Multiplier;
 import com.ftb2om2.model.Note;
 import com.ftb2om2.model.BPM;
+import com.ftb2om2.model.DefaultFormat;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,12 +20,12 @@ public class OsuManiaV14Writer implements Writer {
     private OutputStreamWriter streamWriter;
     private StringBuilder sb;
 
-    private void appendTimingPoints(List<BPM> bpms, List<Multiplier> multipliers, File osuFile, Integer hitsoundVolume) throws IOException {
+    private void appendTimingPoints(DefaultFormat storage, File osuFile, Integer hitsoundVolume) throws IOException {
         try {
             streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
             streamWriter.write("[TimingPoints]\n");
 
-            for (BPM bpm : bpms) {
+            for (BPM bpm : storage.getBpms()) {
                 sb = new StringBuilder();
                 sb.append(bpm.getMs().longValue());
                 sb.append(",");
@@ -35,7 +35,7 @@ public class OsuManiaV14Writer implements Writer {
                 streamWriter.write(sb.toString());
             }
 
-            for (Multiplier multiplier : multipliers) {
+            for (Multiplier multiplier : storage.getMultipliers()) {
                 sb = new StringBuilder();
                 sb.append(multiplier.getMs().longValue());
                 sb.append(",-");
@@ -51,11 +51,11 @@ public class OsuManiaV14Writer implements Writer {
         }
     }
 
-    private void appendHitObjects(List<Note> notes, File osuFile) throws IOException {
+    private void appendHitObjects(DefaultFormat storage, File osuFile) throws IOException {
         try {
             streamWriter = new OutputStreamWriter(new FileOutputStream(osuFile, true), "UTF-8");
             streamWriter.write("[HitObjects]\n");
-            for (Note note : notes) {
+            for (Note note : storage.getNotes()) {
                 sb = new StringBuilder();
                 int ftbLane = note.getLane();
                 int osuLane = 0;
@@ -113,24 +113,19 @@ public class OsuManiaV14Writer implements Writer {
     }
 
     @Override
-    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, String difficultyName, Reader reader) throws IOException {
-
-        //Get all the data from the reader
-        List<BPM> bpms = reader.getBpms();
-        List<Multiplier> multipliers = reader.getMultipliers();
-        List<Note> notes = reader.getNotes();
+    public void write(File osuFile, Metadata metadata, Integer hitsoundVolume, String difficultyName, DefaultFormat storage) throws IOException {
 
         //Add Top "General" Section to the difficulty file
         appendTopGeneralInfo(osuFile, metadata, difficultyName);
 
         //Add converted Timing Points       
-        appendTimingPoints(bpms, multipliers, osuFile, hitsoundVolume);
+        appendTimingPoints(storage, osuFile, hitsoundVolume);
 
         //Adds color header
         appendBottomGeneralInfo(osuFile);
 
         //Add converted Hit Objects
-        appendHitObjects(notes, osuFile);
+        appendHitObjects(storage, osuFile);
     }
 
     private void appendTopGeneralInfo(File osuFile, Metadata metadata, String difficultyName) throws IOException {
