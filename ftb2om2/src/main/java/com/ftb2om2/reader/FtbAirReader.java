@@ -11,15 +11,15 @@ import java.io.IOException;
 
 public class FtbAirReader implements Reader {
 
-    DefaultFormat storage = new DefaultFormat();
+    private DefaultFormat storage = new DefaultFormat();
     private BufferedReader reader;
 
     public FtbAirReader() {
     }
 
     @Override
-    public void read(File ftbFile) throws IOException {
-        reader = new BufferedReader(new FileReader(ftbFile));
+    public void read(File file) throws IOException {
+        reader = new BufferedReader(new FileReader(file));
 
         String line = reader.readLine();
         String[] vars = line.split(" ");
