@@ -3,24 +3,18 @@ package com.ftb2om2.reader;
 import com.ftb2om2.model.Multiplier;
 import com.ftb2om2.model.Note;
 import com.ftb2om2.model.BPM;
+import com.ftb2om2.model.DefaultFormat;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 public class FtbAirReader implements Reader {
 
-    private final List<Note> notes;
-    private final List<BPM> bpms;
-    private final List<Multiplier> multipliers;
+    DefaultFormat storage = new DefaultFormat();
     private BufferedReader reader;
 
     public FtbAirReader() {
-        this.bpms = new LinkedList<>();
-        this.notes = new LinkedList<>();
-        this.multipliers = new LinkedList<>();
     }
 
     @Override
@@ -43,7 +37,7 @@ public class FtbAirReader implements Reader {
                 BPM bpm = new BPM();
                 bpm.setMs(Double.parseDouble(vars[0]));
                 bpm.setBpm(Double.parseDouble(vars[1]));
-                bpms.add(bpm);
+                storage.addBpm(bpm);
                 line = reader.readLine();
             }
 
@@ -58,7 +52,7 @@ public class FtbAirReader implements Reader {
                 Multiplier multiplier = new Multiplier();
                 multiplier.setMs(Double.parseDouble(vars[0]));
                 multiplier.setMultiplier(Double.parseDouble(vars[1]));
-                multipliers.add(multiplier);
+                storage.addMultiplier(multiplier);
                 line = reader.readLine();
             }
 
@@ -74,7 +68,7 @@ public class FtbAirReader implements Reader {
                 note.setMs(Double.parseDouble(vars[0]));
                 note.setDuration(Double.parseDouble(vars[1]));
                 note.setLane(Short.parseShort(vars[2]));
-                notes.add(note);
+                storage.addNote(note);
                 line = reader.readLine();
             }
         } else {
@@ -84,24 +78,12 @@ public class FtbAirReader implements Reader {
     }
 
     @Override
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    @Override
-    public List<Multiplier> getMultipliers() {
-        return multipliers;
-    }
-
-    @Override
-    public List<BPM> getBpms() {
-        return bpms;
-    }
-
-    @Override
     public void clear() {
-        notes.clear();
-        bpms.clear();
-        multipliers.clear();
+        storage.clear();
+    }
+
+    @Override
+    public DefaultFormat getStorage() {
+        return storage;
     }
 }

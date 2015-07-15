@@ -22,7 +22,5 @@ public class Difficulty {
 
     public String getDifficultyName() {
         return difficultyName;
-    }
-    
-    
+    }    
 }
