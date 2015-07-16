@@ -515,9 +515,23 @@ public class MultiplePane extends javax.swing.JPanel implements java.beans.Custo
 
     private void createOsuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOsuFileActionPerformed
         Converter converter;
-        Reader ftbReader = new FtbAirReader();
-        Writer osuManiaV14Writer = new OsuManiaV14Writer();
-        converter = new Converter(ftbReader, osuManiaV14Writer);
+        Reader reader = null;
+        Writer writer = null;
+        
+        switch (jComboBox1.getSelectedIndex()) {
+            case 0:
+                reader = new FtbAirReader();
+                break;
+            case 1:
+                reader = new FtbOldReader();
+                break;
+        }
+
+        switch (jComboBox2.getSelectedIndex()) {
+            case 0:
+                writer = new OsuManiaV14Writer();
+        }
+        converter = new Converter(reader, writer);
 
         Metadata metadata = new Metadata(mP3TagsPane1.getTitleField(),
                 mP3TagsPane1.getUnicodeTitleField(),

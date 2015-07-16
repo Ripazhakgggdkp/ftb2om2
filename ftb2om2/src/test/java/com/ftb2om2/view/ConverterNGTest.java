@@ -69,4 +69,20 @@ public class ConverterNGTest {
         File generatedOutput = new File(getClass().getResource("/osuTestOutput2.osu").getPath());
         assertTrue(FileUtils.contentEquals(correctOutput, generatedOutput));        
     }
+    @Test(enabled = true)
+    public void FtbOldToOsuMania2() throws Exception {
+        System.out.println("Testing conversion between FtbClassic and o!m");
+        String x = getClass().getResource("/").getPath();
+        String inputFilePath = getClass().getResource("/ftbOldTest2-165.txt").getPath();
+        String outputFilePath = getClass().getResource("/").getPath();
+        String name = "osuTestOutput3";
+        Integer volume = 100;
+        Metadata metadata = new Metadata("", "", "", "", "", "");
+        Converter instance = new Converter(new FtbOldReader(), new OsuManiaV14Writer());
+        instance.convert(inputFilePath, outputFilePath, name, volume, metadata);
+        // TODO review the generated test code and remove the default call to fail.
+        File correctOutput = new File(getClass().getResource("/osuCorrectOutput1.osu").getPath());
+        File generatedOutput = new File(getClass().getResource("/osuTestOutput3.osu").getPath());
+        assertTrue(FileUtils.contentEquals(correctOutput, generatedOutput));        
+    }
 }
