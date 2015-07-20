@@ -6,9 +6,5 @@ import java.io.IOException;
 
 public interface Reader {
 
-    public void read(File file) throws IOException;
-    
-    public DefaultFormat getStorage();
-
-    public void clear();
+    public void read(File file, DefaultFormat storage) throws IOException;
 }
