@@ -21,11 +21,11 @@ public class Converter {
     }
 
     public void convert(String inputFilePath, String outputFilePath, String name, Integer volume, Metadata metadata) throws IOException {
+        storage.clear();        
         this.name = name;
         File inputFile = new File(inputFilePath);
         File outputFile = new File(outputFilePath + "\\" + name + ".osu");
-        reader.clear();
-        reader.read(inputFile);
-        writer.write(outputFile, metadata, volume, name, reader.getStorage());
+        reader.read(inputFile, storage);
+        writer.write(outputFile, metadata, volume, name, storage);
     }
 }

@@ -11,14 +11,13 @@ import java.io.IOException;
 
 public class FtbAirReader implements Reader {
 
-    private final DefaultFormat storage = new DefaultFormat();
     private BufferedReader reader;
 
     public FtbAirReader() {
     }
 
     @Override
-    public void read(File file) throws IOException {
+    public void read(File file, DefaultFormat storage) throws IOException {
         reader = new BufferedReader(new FileReader(file));
 
         String line = reader.readLine();
@@ -75,15 +74,5 @@ public class FtbAirReader implements Reader {
             throw new IOException("The file isn't the correct format!");
         }
         reader.close();
-    }
-
-    @Override
-    public void clear() {
-        storage.clear();
-    }
-
-    @Override
-    public DefaultFormat getStorage() {
-        return storage;
     }
 }

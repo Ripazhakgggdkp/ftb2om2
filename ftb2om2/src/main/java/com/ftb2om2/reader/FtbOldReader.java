@@ -35,11 +35,10 @@ import java.util.stream.Stream;
  */
 public class FtbOldReader implements Reader {
 
-    private final DefaultFormat storage = new DefaultFormat();
     private BufferedReader reader;
     private double mainBpm = 120;
 
-    private void readNotes(File file) {
+    private void readNotes(File file, DefaultFormat storage) {
         String readLine;
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -68,10 +67,10 @@ public class FtbOldReader implements Reader {
     }
 
     @Override
-    public void read(File file) throws IOException {
+    public void read(File file, DefaultFormat storage) throws IOException {
         String readLine;        
         
-        readNotes(file);        
+        readNotes(file,storage);        
         mainBpm = ApproximateBpm.approximate(storage.getNotes());
         storage.getNotes().clear();
         
@@ -99,15 +98,5 @@ public class FtbOldReader implements Reader {
                         (short) (Short.parseShort(noteData[2]) - 1)));
             }
         }
-    }
-
-    @Override
-    public DefaultFormat getStorage() {
-        return storage;
-    }
-
-    @Override
-    public void clear() {
-        storage.clear();
     }
 }
