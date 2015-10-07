@@ -1,6 +1,5 @@
 package com.ftb2om2.writer;
 
-import com.ftb2om2.reader.Reader;
 import com.ftb2om2.model.Metadata;
 import com.ftb2om2.model.Multiplier;
 import com.ftb2om2.model.Note;
@@ -13,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.List;
 
 public class OsuManiaV14Writer implements Writer {
 

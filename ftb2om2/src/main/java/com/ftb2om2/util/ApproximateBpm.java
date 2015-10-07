@@ -6,8 +6,6 @@
 package com.ftb2om2.util;
 
 import com.ftb2om2.model.Note;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
