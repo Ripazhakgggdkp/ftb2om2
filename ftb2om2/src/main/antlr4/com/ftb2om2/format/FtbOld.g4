@@ -3,9 +3,11 @@ grammar FtbOld;
 /* Lexical rules */
 
 BPM_IDENTIFIER : 'BPM' ;
-MILLISECOND : [0-9]+'.'*[0-9]+ ;
-NUMBER : [0-9];
+DIGIT : [0-9];
+NUMBER : DIGIT+;
+DECIMAL : NUMBER'.'NUMBER;
 SEPARATOR : '-';
+NULL : '0';
 
 //Skips line breaks and the header
 WS : [ \r\t\u000C\n]+ -> skip ;
@@ -15,14 +17,17 @@ HEADER : '###FILE ALREADY PARSED###' -> skip ;
 map : bpm_entity* note_entity* EOF ;
 
 //Notes
-note_entity : note_millisecond '0' lane //Usual notes
-            | longnote_start_millisecond SEPARATOR longnote_end_millisecond '0' lane; //Long notes
+note_entity : note_millisecond note_null lane //Usual notes
+            | longnote_start_millisecond SEPARATOR longnote_end_millisecond note_null lane; //Long notes
 
-longnote_start_millisecond : MILLISECOND;
-longnote_end_millisecond : MILLISECOND;
-note_millisecond : MILLISECOND;
-lane : NUMBER;
+longnote_start_millisecond : number;
+longnote_end_millisecond : number;
+note_millisecond : number;
+lane : number;
+note_null : number;
 
 bpm_entity : BPM_IDENTIFIER bpm_millisecond bpm_value;
-bpm_millisecond : MILLISECOND;
-bpm_value : MILLISECOND;
+bpm_millisecond : number;
+bpm_value : number;
+
+number : DIGIT | NUMBER | DECIMAL;
