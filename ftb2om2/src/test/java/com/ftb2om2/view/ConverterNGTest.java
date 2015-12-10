@@ -8,6 +8,7 @@ package com.ftb2om2.view;
 import com.ftb2om2.model.DefaultFormat;
 import com.ftb2om2.model.Metadata;
 import com.ftb2om2.reader.FtbAirReader;
+import com.ftb2om2.reader.FtbAirReaderTree;
 import com.ftb2om2.reader.FtbOldReaderTree;
 import com.ftb2om2.reader.FtbOldReader;
 import com.ftb2om2.writer.OsuManiaV14Writer;
@@ -100,6 +101,22 @@ public class ConverterNGTest {
         // TODO review the generated test code and remove the default call to fail.
         File correctOutput = new File(getClass().getResource("/osuCorrectOutput2.osu").getPath());
         File generatedOutput = new File(getClass().getResource("/osuTestOutput2.osu").getPath());
+        assertTrue(FileUtils.contentEquals(correctOutput, generatedOutput));
+    }
+    @Test(enabled = true)
+    public void FtbAirReaderTreeToOsuMania() throws Exception {
+        System.out.println("Testing conversion between FtBAir and o!m");
+        String x = getClass().getResource("/").getPath();
+        String inputFilePath = getClass().getResource("/ftbAirTest1.txt").getPath();
+        String outputFilePath = getClass().getResource("/").getPath();
+        String name = "osuTestOutput1";
+        Integer volume = 100;
+        Metadata metadata = new Metadata("", "", "", "", "", "");
+        Converter instance = new Converter(new FtbAirReaderTree(), new OsuManiaV14Writer());
+        instance.convert(inputFilePath, outputFilePath, name, volume, metadata);
+        // TODO review the generated test code and remove the default call to fail.
+        File correctOutput = new File(getClass().getResource("/osuCorrectOutput1.osu").getPath());
+        File generatedOutput = new File(getClass().getResource("/osuTestOutput1.osu").getPath());
         assertTrue(FileUtils.contentEquals(correctOutput, generatedOutput));
     }
 }
